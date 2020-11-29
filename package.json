@@ -1,0 +1,40 @@
+{
+  "name": "t-manager-0.2",
+  "version": "2.0.0",
+  "description": "A tasks management application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rnlaufz/t_manager.git"
+  },
+  "keywords": [
+    "Time",
+    "management",
+    "tasks",
+    "self-control"
+  ],
+  "author": "Regina Z",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rnlaufz/t_manager/issues"
+  },
+  "homepage": "https://github.com/rnlaufz/t_manager#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "express-validator": "^6.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.17",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
