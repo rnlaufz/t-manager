@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route  } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
 import {v4 as uuid} from "uuid"
 
 
@@ -34,7 +34,7 @@ export class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      isSignedIn: true,
+      isSignedIn: false,
       // Temporary todo list before databse
       tasks: [
         {
