@@ -13,14 +13,10 @@ export default function Login() {
 
    const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    const onSubmit = e => {
+    const onSubmit =  e => {
         e.preventDefault();
 
-        if(password !== passwordTwo){
-            console.log("Passwords do not match")
-        } else {
-            console.log(formData)
-        }
+       
     }
     
 
@@ -34,7 +30,7 @@ export default function Login() {
             <div  className="flex-center-column login-content">
                 <div className="card flex-center-column">
                     <div  className="flex-center-column form-container-sign">
-                        <h3>Sign Up</h3>
+                        <h3>Sign In</h3>
                         <form onSubmit={e => onSubmit(e)}>
                             <div className="form-item">
                                 <label htmlFor="email" className="block">Email</label>

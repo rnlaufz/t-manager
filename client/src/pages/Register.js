@@ -1,28 +1,47 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
+import axios from 'axios'; 
 
 
 export default function Register() {
 
     const [formData, setFormData] = useState({
         name: "",
-        lName: "",
         email:  "",
         password: "",
         passwordTwo: ""  
     });
 
-    const {name, lName, email, password, passwordTwo} = formData;
+    const {name, email, password, passwordTwo} = formData;
 
    const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
 
         if(password !== passwordTwo){
             console.log("Passwords do not match")
         } else {
-            console.log(formData)
+             const newUser = {
+                 name,
+                
+                 email,
+                 password
+             }
+
+             try {
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+
+                 const body = JSON.stringify(newUser);
+                 const res = await axios.post("/api/users", body, config);
+                 console.log(res.data)
+             } catch (err) {
+                 console.error(err.res.data)
+             }
         }
     }
     
@@ -42,10 +61,6 @@ export default function Register() {
                             <div className="form-item">
                                 <label htmlFor="name" className="block">First Name</label>
                                 <input className="form-control" type="text" id="name" name="name" value={name} onChange={e => onChange(e)} required/>
-                            </div>
-                            <div className="form-item">
-                                <label htmlFor="lName" className="block">Last Name</label>
-                                <input className="form-control" type="text" id="lName" name="lName" value={lName} onChange={e => onChange(e)} required />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="email" className="block">Email</label>
