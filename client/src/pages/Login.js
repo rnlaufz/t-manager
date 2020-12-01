@@ -13,9 +13,10 @@ export default function Login() {
 
    const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    const onSubmit =  e => {
+    const onSubmit = async e => {
         e.preventDefault();
 
+        // @TO_DO: add functionality
        
     }
     

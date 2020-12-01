@@ -22,9 +22,10 @@ export default function Register() {
         if(password !== passwordTwo){
             console.log("Passwords do not match")
         } else {
+
+            // @TO_DO: change to Redux
              const newUser = {
                  name,
-                
                  email,
                  password
              }
@@ -59,7 +60,7 @@ export default function Register() {
                         <h3>Sign Up</h3>
                         <form onSubmit={e => onSubmit(e)}>
                             <div className="form-item">
-                                <label htmlFor="name" className="block">First Name</label>
+                                <label htmlFor="name" className="block">Name</label>
                                 <input className="form-control" type="text" id="name" name="name" value={name} onChange={e => onChange(e)} required/>
                             </div>
                             <div className="form-item">
