@@ -1,6 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
-import {v4 as uuid} from "uuid"
+import {v4 as uuid} from "uuid";
+
+// Redux
+import {Provider} from 'react-redux';
+import store from './store'
 
 
 // Import components
@@ -160,7 +164,7 @@ export class App extends React.Component {
   // Rendering application
   render() {
     return (
-        <React.Fragment>
+        <Provider store={store}>
             <Router>
 
           {this.state.isSignedIn ? (
@@ -235,14 +239,14 @@ export class App extends React.Component {
             <Route exact path="/login" render={props => (
               <Login />
           )}/>
-          <Route exact path="/register" render={props => (
+          <Route exact path="/" render={props => (
               <Register />
           )}/>
           </React.Fragment>
           )}
          
         </Router>
-          </React.Fragment>
+          </Provider>
       
           
       
