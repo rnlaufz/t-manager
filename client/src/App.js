@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard'
 import AddForm from './components/AddForm'
 import EditForm from './components/EditForm'
 import CompletedTasks from './components/CompletedTasks'
+import Alert from './components/Alert';
 // Removed
 // import Categories from './components/Categories'
 
@@ -240,7 +241,14 @@ export class App extends React.Component {
               <Login />
           )}/>
           <Route exact path="/" render={props => (
+           <React.Fragment>
+
+            {/* @TO_DO apply styling for alerts */}
+
+             <Alert />
               <Register />
+             </React.Fragment>
+             
           )}/>
           </React.Fragment>
           )}
