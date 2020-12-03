@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios'; 
+import {connect} from 'react-redux'; 
+import {setAlert} from '../actions/alert'
 
-
-export default function Register() {
+ const Register = ({setAlert}) => {
 
     const [formData, setFormData] = useState({
         name: "",
@@ -20,7 +21,7 @@ export default function Register() {
         e.preventDefault();
 
         if(password !== passwordTwo){
-            console.log("Passwords do not match")
+            setAlert("Passwords do not match", 'danger')
         } else {
 
             // @TO_DO: change to Redux
@@ -92,4 +93,5 @@ export default function Register() {
 }
 
 
+export default connect(null, {setAlert})(Register)
 
