@@ -5,6 +5,8 @@ import axios from 'axios';
 import {connect} from 'react-redux'; 
 import {setAlert} from '../actions/alert';
 
+import Alert from '../components/Alert'
+
  const Register = ({setAlert}) => {
 
     const [formData, setFormData] = useState({
@@ -57,6 +59,7 @@ import {setAlert} from '../actions/alert';
         </div>
         <div className="flex-page">
             <div  className="flex-center-column login-content">
+                <Alert />
                 <div className="card flex-center-column">
                     <div  className="flex-center-column form-container-sign">
                         <h3>Sign Up</h3>

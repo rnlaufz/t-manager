@@ -242,10 +242,6 @@ export class App extends React.Component {
           )}/>
           <Route exact path="/" render={props => (
            <React.Fragment>
-
-            {/* @TO_DO apply styling for alerts */}
-
-             <Alert />
               <Register />
              </React.Fragment>
              

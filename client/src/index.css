@@ -10,6 +10,10 @@
     --color-primary-shade: #f6f6f5;
     --color-secondary-light: #00B1CC;
     --color-secondary-dark: #008DA3;
+    --color-success: #00cd00;
+    --color-danger: #ff1a1a;
+    --color-warning: #f5b82e;
+    --color-info: #add8e6;
     --font-primary: 'Roboto', sans-serif;
     --font-secondary: 'Lobster', cursive;
 }
@@ -92,6 +96,37 @@ body {
 
 .btn:hover {
     background-color: var(--color-secondary-dark);
+}
+
+.alert {
+    margin: 0 auto;
+    text-align: center;
+    width: 60%;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert.alert-danger {
+    background-color: var(--color-danger);
+    color: #fff;
+}
+.alert.alert-success {
+    background-color: var(--color-success);
+    text-shadow: 0 0 5px #000;
+    color: #fff;
+}
+.alert.alert-warning {
+    background-color: var(--color-warning);
+    text-shadow: 0 0 5px #000;
+    color: #fff;
+}
+.alert.alert-info {
+    background-color: var(--color-info);
+    text-shadow: 0 0 5px #000;
+    color: #fff;
 }
 
 
