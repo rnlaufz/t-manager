@@ -99,8 +99,10 @@ body {
 }
 
 .alert {
-    margin: 0 auto;
+    margin: 5px auto;
+    padding: 5px;
     text-align: center;
+    font-size: 14px;
     width: 60%;
     height: 40px;
     border-radius: 5px;
