@@ -28,6 +28,12 @@ import Alert from '../components/Alert'
             setAlert("Passwords do not match", 'danger')
         } else {
          register({name, email, password});
+         setFormData({
+            name: "",
+            email:  "",
+            password: "",
+            passwordTwo: ""  
+         })
         }
     }
     
