@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import {v4 as uuid} from "uuid";
 
 // Redux
@@ -14,7 +14,7 @@ import Dashboard from './components/Dashboard'
 import AddForm from './components/AddForm'
 import EditForm from './components/EditForm'
 import CompletedTasks from './components/CompletedTasks'
-import Alert from './components/Alert';
+
 // Removed
 // import Categories from './components/Categories'
 
@@ -30,6 +30,9 @@ import Tasks from './components/Tasks'
 import Register from './pages/Register'
 import Login from './pages/Login'
 
+import {loadUser} from './actions/auth'
+import setAuthToken from './utils/setAuthToken'
+
 import './index.css';
 
 
@@ -39,7 +42,7 @@ export class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      isSignedIn: false,
+      isAuthenticated: false,
       // Temporary todo list before databse
       tasks: [
         {
@@ -119,6 +122,9 @@ export class App extends React.Component {
     }
   }
 
+
+
+
   // Update navigtion title 
   updateNav = (newTitle) => {
     this.setState({navTitle: newTitle})
@@ -159,16 +165,21 @@ export class App extends React.Component {
   }
 
 
-
+componentDidMount(){
+  store.dispatch(loadUser())
+}
 
 
   // Rendering application
   render() {
+    if(localStorage.token){
+      setAuthToken(localStorage.token);
+  }
     return (
         <Provider store={store}>
             <Router>
 
-          {this.state.isSignedIn ? (
+          {this.state.isAuthenticated ? (
             <React.Fragment>
               <div className="container">
    <SecondaryNav navTitle={this.state.navTitle}/>
