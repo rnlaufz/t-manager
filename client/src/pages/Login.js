@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {login} from '../actions/auth';
 
 
-export default function Login() {
+const Login = ({login}) =>  {
 
     const [formData, setFormData] = useState({
         email:  "",
@@ -19,8 +22,6 @@ export default function Login() {
         // @TO_DO: add functionality
        
     }
-    
-
     return (
         <div className="container flex-center-row">
         <div  className="flex-page greeting">
@@ -54,5 +55,11 @@ export default function Login() {
         </div>
         
     </div>
-    )
+    );
+};
+
+Login.propTypes = {
+    login: PropTypes.func.isRequired
 }
+
+export default connect(null, {login})(Login);
