@@ -18,9 +18,7 @@ const Login = ({login}) =>  {
 
     const onSubmit = async e => {
         e.preventDefault();
-
-        // @TO_DO: add functionality
-       
+       login(email, password);
     }
     return (
         <div className="container flex-center-row">
