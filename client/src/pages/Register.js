@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios'; 
 import {connect} from 'react-redux'; 
 import {setAlert} from '../actions/alert';
@@ -8,7 +8,7 @@ import {register} from '../actions/auth';
 
 import Alert from '../components/Alert'
 
- const Register = ({setAlert, register}) => {
+ const Register = ({setAlert, register, isAuthenticated}) => {
 
     const [formData, setFormData] = useState({
         name: "",
@@ -37,6 +37,11 @@ import Alert from '../components/Alert'
         }
     }
     
+    // Redirect after registration 
+    // TEST THIS
+    if(isAuthenticated){
+        return <Redirect to="/" />
+    }
 
     return (
         <div className="container flex-center-row">
@@ -85,8 +90,13 @@ import Alert from '../components/Alert'
 
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 }
 
-export default connect(null, {setAlert, register})(Register)
+ const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+ })
+
+export default connect(mapStateToProps, {setAlert, register})(Register)
 
