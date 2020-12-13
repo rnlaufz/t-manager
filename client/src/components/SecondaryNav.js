@@ -1,17 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {logout} from '../actions/auth';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCog, faPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 
+import React from 'react'
 
-
-export class SecondaryNav extends React.Component {
-
-  render() {
-    return (
-      <div className="flex-center-row secondary-nav">
+const SecondaryNav = ({auth: {isAuthenticated, loading}, logout}) => {
+  return (
+    <div className="flex-center-row secondary-nav">
     <h2><span className="logo title">Tasks Manager</span> | {this.props.navTitle}</h2>
     <ul className="flex-center-row">
       
@@ -22,8 +23,16 @@ export class SecondaryNav extends React.Component {
        
     </ul>
 </div> 
-    )
-  }
+  )
 }
 
-export default SecondaryNav
+
+SecondaryNav.PropTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapDispatchToProps = state => ({
+  auth: state.auth
+})
+export default connect(mapStateToProps, {logout})(SecondaryNav);
