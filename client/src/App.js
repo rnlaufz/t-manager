@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {v4 as uuid} from "uuid";
 
 // Redux
@@ -179,87 +179,79 @@ componentDidMount(){
         <Provider store={store}>
             <Router>
 
-          {this.state.isAuthenticated ? (
-            <React.Fragment>
-              <div className="container">
-   <SecondaryNav navTitle={this.state.navTitle}/>
-   <div className="wrapper">
-   
-     {/* Dashboard */}
-     <Route exact path="/" render={props => (
-       <React.Fragment>
-       <MainNav links={this.state.dashLinks} />
-        <Dashboard>
-          <Tasks updateNav={this.updateNav}  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />
-          </Dashboard>
-         </React.Fragment> 
-     )} />
-      <Route exact path="/new_task" render={props => (
-         <React.Fragment>
-           <MainNav links={this.state.dashLinks} />
-          <Dashboard>
-         <AddForm updateNav={this.updateNav}  addTask = { this.addTask}  />
-         </Dashboard>
-         </React.Fragment>
-    )} />
-      <Route exact path="/edit_task" render={props => (
-         <React.Fragment>
-           <MainNav links={this.state.dashLinks} />
-          <Dashboard>
-         <EditForm updateNav={this.updateNav} />
-         </Dashboard>
-         </React.Fragment>
-    )} />
+              <React.Fragment>
+              <SecondaryNav navTitle={this.state.navTitle}/>
+              <React.Fragment>
+              <Route exact path="/" render={props => (
+                <React.Fragment>
+                <MainNav links={this.state.dashLinks} />
+                <Dashboard>
+                  <Tasks updateNav={this.updateNav}  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />
+                  </Dashboard>
+                  </React.Fragment>
 
-      <Route exact path="/completed" render={props => (
-       <React.Fragment>
-       <MainNav links={this.state.dashLinks} />
-        <Dashboard>
-          <CompletedTasks updateNav={this.updateNav}  tasks = {this.state.tasks} />
-          </Dashboard>
-         </React.Fragment> 
-     )} />
-
-   
-     
-      <Route exact path="/settings/user_data" render={props => (
-        <React.Fragment>
-          <MainNav links={this.state.settLinks} />
-          <Dashboard>
-         <Settings updateNav={this.updateNav}>
-           <SettingsUserData />
-           </Settings>
-         </Dashboard>
-         </React.Fragment>
-    )} />
-      <Route exact path="/settings/user_account" render={props => (
-        <React.Fragment>
-          <MainNav links={this.state.settLinks} />
-          <Dashboard>
-         <Settings updateNav={this.updateNav}>
-           <SettingsAccount   />
-           </Settings>
-         </Dashboard>
-         </React.Fragment>
-    )} />
-   </div>
-   <Footer />
-  </div>
-          </React.Fragment>
-          ) : (
-            <React.Fragment>
-            <Route exact path="/login" render={props => (
+              )} />
+                   <Route exact path="/new_task" render={props => (
+                     <React.Fragment>
+                      <MainNav links={this.state.dashLinks} />
+                     <Dashboard>
+                    <AddForm updateNav={this.updateNav}  addTask = { this.addTask}  />
+                    </Dashboard>
+                  </React.Fragment>
+               )} />
+                 <Route exact path="/edit_task" render={props => (
+                    <React.Fragment>
+                      <MainNav links={this.state.dashLinks} />
+                     <Dashboard>
+                    <EditForm updateNav={this.updateNav} />
+                    </Dashboard>
+                    </React.Fragment>
+               )} />
+           
+                 <Route exact path="/completed" render={props => (
+                  <React.Fragment>
+                  <MainNav links={this.state.dashLinks} />
+                   <Dashboard>
+                     <CompletedTasks updateNav={this.updateNav}  tasks = {this.state.tasks} />
+                     </Dashboard>
+                    </React.Fragment> 
+                )} />
+           
+              
+                
+                 <Route exact path="/settings/user_data" render={props => (
+                   <React.Fragment>
+                     <MainNav links={this.state.settLinks} />
+                     <Dashboard>
+                    <Settings updateNav={this.updateNav}>
+                      <SettingsUserData />
+                      </Settings>
+                    </Dashboard>
+                    </React.Fragment>
+               )} />
+                 <Route exact path="/settings/user_account" render={props => (
+                   <React.Fragment>
+                     <MainNav links={this.state.settLinks} />
+                     <Dashboard>
+                    <Settings updateNav={this.updateNav}>
+                      <SettingsAccount   />
+                      </Settings>
+                    </Dashboard>
+                    </React.Fragment>
+               )} />
+            
+              <Footer />
+            
+    </React.Fragment>.
+           <Switch>
+           <Route exact path="/login" render={props => (
               <Login />
           )}/>
-          <Route exact path="/" render={props => (
-           <React.Fragment>
-              <Register />
-             </React.Fragment>
-             
+          <Route exact path="/register" render={props => (
+              <Register /> 
           )}/>
-          </React.Fragment>
-          )}
-         
+             </Switch>
+         </React.Fragment>
         </Router>
           </Provider>
       

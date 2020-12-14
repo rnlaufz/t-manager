@@ -1,14 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {logout} from '../actions/auth';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCog, faPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 
-import React from 'react'
+
+// @TO_DO: brainstorm about possible layout changes 
 
 const SecondaryNav = ({auth: {isAuthenticated, loading}, logout}) => {
   return (
@@ -27,12 +28,12 @@ const SecondaryNav = ({auth: {isAuthenticated, loading}, logout}) => {
 }
 
 
-SecondaryNav.PropTypes = {
-  logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+SecondaryNav.propTypes = {
+  logout: propTypes.func.isRequired,
+  auth: propTypes.object.isRequired
 }
 
-const mapDispatchToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth
 })
 export default connect(mapStateToProps, {logout})(SecondaryNav);
