@@ -180,8 +180,10 @@ componentDidMount(){
             <Router>
 
               <React.Fragment>
+                <div className="container">
               <SecondaryNav navTitle={this.state.navTitle}/>
-              <React.Fragment>
+              <div className="wrapper">
+             
               <Route exact path="/" render={props => (
                 <React.Fragment>
                 <MainNav links={this.state.dashLinks} />
@@ -239,9 +241,9 @@ componentDidMount(){
                     </Dashboard>
                     </React.Fragment>
                )} />
-            
+            </div>
               <Footer />
-            
+            </div>
     </React.Fragment>.
            <Switch>
            <Route exact path="/login" render={props => (
@@ -251,7 +253,7 @@ componentDidMount(){
               <Register /> 
           )}/>
              </Switch>
-         </React.Fragment>
+        
         </Router>
           </Provider>
       

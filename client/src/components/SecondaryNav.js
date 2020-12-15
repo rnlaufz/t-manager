@@ -14,11 +14,6 @@ import {faCog, faPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 export class SecondaryNav extends Component {
 
-  constructor(){
-    super()
-    
-  }
-
   render() {
     const {isAuthenticated, loading} = auth;
     const {logout} = auth;
