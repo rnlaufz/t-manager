@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 import {logout} from '../actions/auth';
-import auth from '../reducers/auth'
+
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,9 +14,15 @@ import {faCog, faPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 export class SecondaryNav extends Component {
 
+  constructor({auth: {isAuthenticated, loading}, logout}){
+    super() 
+      this.isAuthenticated = isAuthenticated;
+      this.loading = loading;
+      this.logout = logout;
+    
+  }
+
   render() {
-    const {isAuthenticated, loading} = auth;
-    const {logout} = auth;
     const authLinks = (
       <ul className="flex-center-row">
          <li><Link to='/new_task'><i><FontAwesomeIcon icon={faPlus} /></i></Link></li>
@@ -33,12 +39,12 @@ export class SecondaryNav extends Component {
       
    </ul>
     )
-    // const {auth: {isAuthenticated, loading}, logout}
+ 
     return (
       <div className="flex-center-row secondary-nav">
       {/* Fix func */}
     <h2><span className="logo title">Tasks Manager</span> | {this.props.navTitle}</h2>
-   {!loading && (<React.Fragment>{isAuthenticated ? authLinks : registerLinks}</React.Fragment>)}
+   {!this.loading && (<React.Fragment>{this.isAuthenticated ? authLinks : registerLinks}</React.Fragment>)}
 </div> 
     )
   }
