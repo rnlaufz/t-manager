@@ -18,7 +18,8 @@ export class SecondaryNav extends Component {
     super() 
       this.isAuthenticated = isAuthenticated;
       this.loading = loading;
-      this.logout = logout;
+      this.logout = logout
+      
     
   }
 
@@ -28,7 +29,7 @@ export class SecondaryNav extends Component {
          <li><Link to='/new_task'><i><FontAwesomeIcon icon={faPlus} /></i></Link></li>
           <li><Link to="/settings/user_data"><i ><FontAwesomeIcon icon={faCog} /></i></Link></li>
           {/* This one temporarily leads to index page */}
-          <li><Link onClick={logout}><i><FontAwesomeIcon icon={faSignOutAlt} /></i></Link></li>
+          <li><button onClick={this.logout}><i><FontAwesomeIcon icon={faSignOutAlt} /></i></button></li>
       </ul>
     )
   
