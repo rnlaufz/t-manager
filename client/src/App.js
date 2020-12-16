@@ -241,11 +241,7 @@ componentDidMount(){
                     </Dashboard>
                     </React.Fragment>
                )} />
-            </div>
-              <Footer />
-            </div>
-    </React.Fragment>.
-           <Switch>
+                   <Switch>
            <Route exact path="/login" render={props => (
               <Login />
           )}/>
@@ -253,6 +249,12 @@ componentDidMount(){
               <Register /> 
           )}/>
              </Switch>
+
+            </div>
+              <Footer />
+            </div>
+    </React.Fragment>.
+    
         
         </Router>
           </Provider>

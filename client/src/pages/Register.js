@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios'; 
 import {connect} from 'react-redux'; 
@@ -89,9 +89,9 @@ import Alert from '../components/Alert'
 }
 
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    setAlert: propTypes.func.isRequired,
+    register: propTypes.func.isRequired,
+    isAuthenticated: propTypes.bool
 }
 
  const mapStateToProps = state => ({
