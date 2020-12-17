@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {login} from '../actions/auth';
 
 
@@ -65,8 +65,8 @@ const Login = ({login, isAuthenticated}) =>  {
 };
 
 Login.propTypes = {
-    login: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    login: propTypes.func.isRequired,
+    isAuthenticated: propTypes.bool
 }
 
  const mapStateToProps = state => ({
