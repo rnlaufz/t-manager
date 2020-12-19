@@ -102,6 +102,11 @@ export class App extends React.Component {
           key: uuid(),
           linkTitle: "Account",
           linkPath: "/settings/user_account"
+        },
+        {
+          key: uuid(),
+          linkTitle: "Dashboard",
+          linkPath: "/"
         }
       ],
       // categories: [
@@ -243,7 +248,7 @@ componentDidMount(){
                )} />
                    <Switch>
            <Route exact path="/login" render={props => (
-              <Login />
+              <Login navTitle={this.state.navTitle} />
           )}/>
           <Route exact path="/register" render={props => (
               <Register /> 

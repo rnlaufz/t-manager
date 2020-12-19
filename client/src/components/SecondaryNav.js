@@ -22,6 +22,7 @@ const SecondaryNav = ({auth: {isAuthenticated, loading}, logout, navTitle}) => {
     </ul>
   )
 
+
 const registerLinks = (
     <ul className="flex-center-row">
     <li><Link to='/register'>Sign Up</Link></li>
@@ -32,7 +33,7 @@ const registerLinks = (
   return (
     <div className="flex-center-row secondary-nav">
     {/* Fix func */}
-  <h2><span className="logo title">Tasks Manager</span> | {navTitle} </h2>
+  <h2><span className="logo title">T-manager</span> | <React.Fragment>{isAuthenticated ? navTitle : navTitle = "Welcome!"} </React.Fragment> </h2>
  <React.Fragment>{ isAuthenticated ? authLinks : !isAuthenticated ? registerLinks : null}</React.Fragment>
 </div> 
   )
