@@ -33,7 +33,7 @@ const registerLinks = (
   return (
     <div className="flex-center-row secondary-nav">
     {/* Fix func */}
-  <h2><span className="logo title">T-manager</span> | <React.Fragment>{isAuthenticated ? navTitle : navTitle = "Welcome!"} </React.Fragment> </h2>
+  <h2> <Link to="/" className="logo title"> T-manager </Link> | <React.Fragment>{isAuthenticated ? navTitle : navTitle = "Welcome!"} </React.Fragment> </h2>
  <React.Fragment>{ isAuthenticated ? authLinks : !isAuthenticated ? registerLinks : null}</React.Fragment>
 </div> 
   )

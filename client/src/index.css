@@ -218,6 +218,11 @@ body {
   text-decoration: none;
 }
 
+.title {
+    text-decoration: none;
+    color: var(--color-primary);
+} 
+
 
 /* Wrapper */
 .wrapper {
