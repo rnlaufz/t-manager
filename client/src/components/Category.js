@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrash} from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,7 @@ export class Category extends Component {
 
 // Prop types
 Category.propTypes = {
-    category: PropTypes.object.isRequired
+    category: propTypes.object.isRequired
 }
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 import Category from "./Category"
 
@@ -52,6 +52,6 @@ export class Categories extends Component {
 
 // Prop types
 Categories.propTypes = {
-    categories: PropTypes.array.isRequired
+    categories: propTypes.array.isRequired
 }
 export default Categories
