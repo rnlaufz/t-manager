@@ -15,7 +15,7 @@ import {faCog, faPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 const SecondaryNav = ({auth: {isAuthenticated, loading}, logout, navTitle}) => {
   const authLinks = (
     <ul className="flex-center-row">
-       <li><Link to='/new_task'><i><FontAwesomeIcon icon={faPlus} /></i></Link></li>
+       <li><Link to='/dashboard/new_task'><i><FontAwesomeIcon icon={faPlus} /></i></Link></li>
         <li><Link to="/settings/user_data"><i ><FontAwesomeIcon icon={faCog} /></i></Link></li>
         {/* This one temporarily leads to index page */}
         <li><a href="#!" onClick={logout}><i><FontAwesomeIcon icon={faSignOutAlt} /></i></a></li>
@@ -33,7 +33,7 @@ const registerLinks = (
   return (
     <div className="flex-center-row secondary-nav">
     {/* Fix func */}
-  <h2> <Link to="/" className="logo title"> T-manager </Link> | <React.Fragment>{isAuthenticated ? navTitle : navTitle = "Welcome!"} </React.Fragment> </h2>
+  <h2> <Link to={isAuthenticated ? "/dashboard" : "/"} className="logo title"> T-manager </Link> | <React.Fragment>{isAuthenticated ? navTitle : navTitle = "Welcome!"} </React.Fragment> </h2>
  <React.Fragment>{ isAuthenticated ? authLinks : !isAuthenticated ? registerLinks : null}</React.Fragment>
 </div> 
   )
