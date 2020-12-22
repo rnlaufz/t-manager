@@ -421,7 +421,6 @@ body {
     text-align: center;
 }
 
-/* Greeting section */
 .greeting {
     background: url(./img/greeting-section.jpg) no-repeat center center/cover;
     padding-top: 10rem;
@@ -435,6 +434,7 @@ body {
 .greeting p {
     font-size: 160%;
     padding-top: 0.5rem;
+    padding-bottom: 1rem;
 }
 
 /* Form section */
@@ -499,3 +499,5 @@ body {
 .card p a {
     color: var(--color-secondary-dark);
 }
+
+

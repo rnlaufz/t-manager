@@ -8,9 +8,6 @@ import store from './store'
 
 
 // Import components
-
-import Landing from './components/Landing'
-
 import SecondaryNav from './components/SecondaryNav'
 import MainNav from './components/MainNav'
 import Dashboard from './components/Dashboard'
@@ -190,8 +187,8 @@ componentDidMount(){
       <Router>
         <div className="container">
           <SecondaryNav navTitle={this.state.navTitle} />
-          <Route exact path="/" component={Landing} />
           <div className="wrapper">
+          <Route exact path="/" component={Register} />
             <Alert />
             <Switch>
             <Route exact path="/login" render={props =>(<Login navTitle={this.state.navTitle} />)}/>

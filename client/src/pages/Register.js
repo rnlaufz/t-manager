@@ -50,7 +50,7 @@ import Alert from '../components/Alert'
             <p>More tasks please!</p>
         </div>
         <div className="flex-page">
-            <div  className="flex-center-column login-content">
+            <div className="flex-center-column login-content">
                 <Alert />
                 <div className="card flex-center-column">
                     <div  className="flex-center-column form-container-sign">
