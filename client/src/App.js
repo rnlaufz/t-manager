@@ -4,35 +4,35 @@ import {v4 as uuid} from "uuid";
 
 // Redux
 import {Provider} from 'react-redux';
-import store from './store'
-
+import store from './store';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 // Import components
-import SecondaryNav from './components/SecondaryNav'
-import MainNav from './components/MainNav'
-import Dashboard from './components/Dashboard'
-import PrivateRoute from './components/routing/PrivateRoute'
-import AddForm from './components/AddForm'
-import EditForm from './components/EditForm'
-import CompletedTasks from './components/CompletedTasks'
+import SecondaryNav from './components/SecondaryNav';
+import MainNav from './components/MainNav';
+import Dashboard from './components/Dashboard';
+
+import AddForm from './components/AddForm';
+import EditForm from './components/EditForm';
+import CompletedTasks from './components/CompletedTasks';
 
 // Removed
 // import Categories from './components/Categories'
 
 
-import Footer from './components/Footer'
-import Settings from './pages/settings_page/Settings'
-import SettingsUserData from './pages/settings_page/SettingsUserData'
+import Footer from './components/Footer';
+import Settings from './pages/settings_page/Settings';
+import SettingsUserData from './pages/settings_page/SettingsUserData';
 import SettingsAccount from './pages/settings_page/SettingsAccount';
 
-import Tasks from './components/Tasks'
+import Tasks from './components/Tasks';
 
 
-import Register from './pages/Register'
-import Login from './pages/Login'
+import Register from './pages/Register';
+import Login from './pages/Login';
 
-import {loadUser} from './actions/auth'
-import setAuthToken from './utils/setAuthToken'
+import {loadUser} from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
 import './index.css';
 import Alert from './components/Alert';
@@ -188,7 +188,7 @@ componentDidMount(){
         <div className="container">
           <SecondaryNav navTitle={this.state.navTitle} />
           <div className="wrapper">
-          <Route exact path="/" component={Register} />
+          <Route exact path="/" render={props =>(<Register navTitle={this.state.navTitle} /> )} />
             <Alert />
             <Switch>
             <Route exact path="/login" render={props =>(<Login navTitle={this.state.navTitle} />)}/>
