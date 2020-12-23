@@ -17,6 +17,6 @@ PrivateRoute.propTypes = {
       auth: state.auth,
       isAuthenticated: state.auth.isAuthenticated,
       loading: state.auth.loading
-  })
+  });
   
-  export default connect(mapStateToProps)(PrivateRoute)
+  export default connect(mapStateToProps)(PrivateRoute);
