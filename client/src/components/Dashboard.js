@@ -4,21 +4,19 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {v4 as uuid} from "uuid";
 
 // Import components
-import SecondaryNav from './SecondaryNav';
-import MainNav from './MainNav';
 import AddForm from './AddForm';
 import EditForm from './EditForm';
 import CompletedTasks from './CompletedTasks';
-import Footer from './Footer';
+
 import Settings from '../pages/settings_page/Settings';
 import SettingsUserData from '../pages/settings_page/SettingsUserData';
 import SettingsAccount from '../pages/settings_page/SettingsAccount';
 import Tasks from './Tasks';
 
+import PrivateRoute from './routing/PrivateRoute';
 
 
-
-export class Dashboard extends React.Component {
+class Dashboard extends React.Component {
 
 
   constructor(){
@@ -151,6 +149,8 @@ export class Dashboard extends React.Component {
     
   }
 
+  // @TO_DO Rebuild component structure 
+
   render() {
     return (
       <div className="flex-center-column dashboard">
@@ -162,7 +162,7 @@ export class Dashboard extends React.Component {
                  <AddForm updateNav={this.updateNav}  addTask = { this.addTask}  />
                 
                )} />
-         <Route exact path="/dashboard/edit_task" render={props => (
+         <Route exact path="/edit_task" render={props => (
                     <EditForm updateNav={this.updateNav} />
               )} />    
 

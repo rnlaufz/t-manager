@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {v4 as uuid} from "uuid";
-
+import propTypes from 'prop-types';
 // Redux
 import {Provider} from 'react-redux';
 import store from './store';
-import PrivateRoute from './components/routing/PrivateRoute';
+import PrivateRoute from './components/routing/PrivateRoute'
 
 // Import css
 import './index.css';
@@ -24,8 +24,6 @@ import setAuthToken from './utils/setAuthToken';
 
 
 import Alert from './components/Alert';
-
-
 
 export class App extends React.Component {
 
@@ -91,13 +89,18 @@ componentDidMount(){
             <Switch>
             <Route exact path="/login" render={props =>(<Login navTitle={this.state.navTitle} />)}/>
             <Route exact path="/register" render={props =>(<Register navTitle={this.state.navTitle} /> )}/>
-            <Route exact path="/dashboard" render={props => (
+            
+            {/* @TO_DO rebuild componet structure */}
+
+            <PrivateRoute exact path="/dashboard" component={MainNav, Dashboard} />
+
+            {/* <Route exact path="/dashboard" render={props => (
               <React.Fragment>
               <MainNav links={this.state.dashLinks} />
                      <Dashboard/>   
               </React.Fragment>
-            )} />
-             <Route exact path="/dashboard/new_task" render={props => (
+            )} /> */}
+             {/* <Route exact path="/dashboard/new_task" render={props => (
                 <React.Fragment>
                    <MainNav links={this.state.dashLinks} />
                    <Dashboard />
@@ -119,7 +122,7 @@ componentDidMount(){
                  )} />
 
                  {/* @TO_DO Move to Dashboard */}
-              <Route exact path="/settings/user_data" render={props => (
+              {/* <Route exact path="/settings/user_data" render={props => (
             <React.Fragment>
                  <MainNav links={this.state.settLinks} />
                       <Dashboard />
@@ -132,7 +135,7 @@ componentDidMount(){
                    <Dashboard/>
                      
                     </React.Fragment>
-                )} />
+                )} /> */} 
 
             </Switch>
           </div>
@@ -145,7 +148,6 @@ componentDidMount(){
     )
   }
 }
-
 
 
 export default App;
