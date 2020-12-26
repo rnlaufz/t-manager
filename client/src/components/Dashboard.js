@@ -7,6 +7,7 @@ import {v4 as uuid} from "uuid";
 import AddForm from './AddForm';
 import EditForm from './EditForm';
 import CompletedTasks from './CompletedTasks';
+import MainNav from './MainNav';
 
 import Settings from '../pages/settings_page/Settings';
 import SettingsUserData from '../pages/settings_page/SettingsUserData';
@@ -153,6 +154,8 @@ class Dashboard extends React.Component {
 
   render() {
     return (
+      <React.Fragment>
+        <MainNav links={this.state.dashLinks} />
       <div className="flex-center-column dashboard">
         <Route exact path='/dashboard' render={props => (
           <Tasks updateNav={this.updateNav}  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />   
@@ -166,7 +169,7 @@ class Dashboard extends React.Component {
                     <EditForm updateNav={this.updateNav} />
               )} />    
 
-            <Route exact path="/dashboard/completed" render={props => (
+            <Route exact path="/completed" render={props => (
                       <CompletedTasks updateNav={this.updateNav}  tasks = {this.state.tasks} />
                    
                  )} /> 
@@ -177,13 +180,13 @@ class Dashboard extends React.Component {
                   
                )} />  
                   <Route exact path="/settings/user_account" render={props => (
-              
                      <Settings updateNav={this.updateNav}>
                       <SettingsAccount   />
                       </Settings>
                     
                 )} />        
     </div>
+    </React.Fragment>
     )
   }
 }

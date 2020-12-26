@@ -14,7 +14,6 @@ import './index.css';
 import Dashboard from './components/Dashboard';
 
 import SecondaryNav from './components/SecondaryNav';
-import MainNav from './components/MainNav';
 import Footer from './components/Footer';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -92,7 +91,7 @@ componentDidMount(){
             
             {/* @TO_DO rebuild componet structure */}
 
-            <PrivateRoute exact path="/dashboard" component={MainNav, Dashboard} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
 
             {/* <Route exact path="/dashboard" render={props => (
               <React.Fragment>
