@@ -14,6 +14,7 @@ import './index.css';
 import Dashboard from './components/Dashboard';
 
 import SecondaryNav from './components/SecondaryNav';
+import AddForm from './components/AddForm'
 import Footer from './components/Footer';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -29,37 +30,6 @@ export class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      isAuthenticated: false,
-      // Navigation Links
-      dashLinks: [
-        {
-          key: uuid(),
-          linkTitle: "My Tasks",
-          linkPath: "/dashboard"
-        },
-        {
-          key: uuid(),
-          linkTitle: "Completed",
-          linkPath: "/dashboard/completed"
-        }
-      ],
-      settLinks: [
-        {
-          key: uuid(),
-          linkTitle: "User",
-          linkPath: "/settings/user_data"
-        },
-        {
-          key: uuid(),
-          linkTitle: "Account",
-          linkPath: "/settings/user_account"
-        },
-        {
-          key: uuid(),
-          linkTitle: "Dashboard",
-          linkPath: "/dashboard"
-        }
-      ],
    navTitle: "Dashboard"
     }
   }
@@ -72,11 +42,15 @@ componentDidMount(){
   store.dispatch(loadUser())
 }
 
+
+
   // Rendering application
   render() {
     if(localStorage.token){
       setAuthToken(localStorage.token);
   }
+
+  
     return (      
     <Provider store={store}> 
       <Router>
@@ -91,51 +65,14 @@ componentDidMount(){
             
             {/* @TO_DO rebuild componet structure */}
 
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            {/* Protefcted Route */}
+            {/* <PrivateRoute exact path="/dashboard" component={(props) => <Dashboard {...props.children} />} /> */}
 
-            {/* <Route exact path="/dashboard" render={props => (
-              <React.Fragment>
-              <MainNav links={this.state.dashLinks} />
-                     <Dashboard/>   
-              </React.Fragment>
-            )} /> */}
-             {/* <Route exact path="/dashboard/new_task" render={props => (
-                <React.Fragment>
-                   <MainNav links={this.state.dashLinks} />
-                   <Dashboard />
-                  </React.Fragment>
-               )} />
-               <Route exact path="/dashboard/edit_task" render={props => (
-                    <React.Fragment>
-                      <MainNav links={this.state.dashLinks} />
-                     <Dashboard />
-                   </React.Fragment>
-              )} />
-             <Route exact path="/dashboard/completed" render={props => (
-              
-              <React.Fragment>
-              <MainNav links={this.state.dashLinks} />
-             <Dashboard />
-           </React.Fragment>
-                     
-                 )} />
-
-                 {/* @TO_DO Move to Dashboard */}
-              {/* <Route exact path="/settings/user_data" render={props => (
-            <React.Fragment>
-                 <MainNav links={this.state.settLinks} />
-                      <Dashboard />
-                   
-                   </React.Fragment>
-               )} />
-                <Route exact path="/settings/user_account" render={props => (
-               <React.Fragment>
-                   <MainNav links={this.state.settLinks} />
-                   <Dashboard/>
-                     
-                    </React.Fragment>
-                )} /> */} 
-
+            <Route exact path="/dashboard" render={props => (
+            <Dashboard>
+              {props.children}
+              </Dashboard>
+            )} />
             </Switch>
           </div>
           <Footer />
@@ -145,8 +82,12 @@ componentDidMount(){
 
 
     )
+  
   }
+  
+
 }
+
 
 
 export default App;

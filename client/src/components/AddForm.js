@@ -9,9 +9,9 @@ export class AddForm extends Component {
     }
 
    
-  componentDidMount(){
-      this.props.updateNav(this.state.navTitle)
-  }
+//   componentDidMount(){
+//       this.props.updateNav(this.state.navTitle)
+//   }
 
     onSubmit = (e) => {
         e.preventDefault();

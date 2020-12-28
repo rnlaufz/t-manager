@@ -12,9 +12,9 @@ export class Tasks extends Component {
         navTitle: "Dashboard"
     }
 
-  componentDidMount(){
-      this.props.updateNav(this.state.navTitle)
-  }
+//   componentDidMount(){
+//       this.props.updateNav(this.state.navTitle)
+//   }
 
     render() {
         

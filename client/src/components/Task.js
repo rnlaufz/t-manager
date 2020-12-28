@@ -21,7 +21,7 @@ export class Task extends Component {
         return (
         <li style={this.getStyle()} className="task"> <p className="list-item-control">{this.props.task.title} {this.props.task.urgent ? <small className="urgent"><FontAwesomeIcon icon={faExclamationCircle} /></small> : null}</p>
         <button onClick={this.props.markCompleted.bind(this, id)} className="completed li-btn"><i><FontAwesomeIcon icon={faCheck} /></i></button>
-         <Link to="/dashboard/edit_task" className="edit li-btn" ><i><FontAwesomeIcon icon={faEdit} /></i></Link>
+         <Link to="/edit_task" className="edit li-btn" ><i><FontAwesomeIcon icon={faEdit} /></i></Link>
             <button onClick={this.props.deleteTask.bind(this, id)} className="delete li-btn"><i><FontAwesomeIcon icon={faTrash} /></i></button></li>
         )
     }

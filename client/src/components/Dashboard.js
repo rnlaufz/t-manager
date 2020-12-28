@@ -20,10 +20,9 @@ import PrivateRoute from './routing/PrivateRoute';
 class Dashboard extends React.Component {
 
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-      isAuthenticated: false,
       // Temporary todo list before databse
       tasks: [
         {
@@ -77,12 +76,12 @@ class Dashboard extends React.Component {
         {
           key: uuid(),
           linkTitle: "User",
-          linkPath: "/settings/user_data"
+          linkPath: "/dashboard/settings/user_data"
         },
         {
           key: uuid(),
           linkTitle: "Account",
-          linkPath: "/settings/user_account"
+          linkPath: "/dashboard/settings/user_account"
         },
         {
           key: uuid(),
@@ -90,35 +89,14 @@ class Dashboard extends React.Component {
           linkPath: "/dashboard"
         }
       ],
-      // categories: [
-      //   {
-      //     id: uuid(),
-      //     categoryTitle: "Home"
-      //   },
-      //   {
-      //     id: uuid(),
-      //     categoryTitle: "Hobby"
-      //   },
-      //   {
-      //     id: uuid(),
-      //     categoryTitle: "Work"
-      //   }
-      // ],
       navTitle: "Dashboard"
     }
   }
-
-
-
-
   // Update navigtion title 
-  updateNav = (newTitle) => {
-    this.setState({navTitle: newTitle})
+  // updateNav = (newTitle) => {
+  //   this.setState({navTitle: newTitle})
     
-  }
-
-  
-
+  // }
   // Add task
   addTask = (title, urgent) => {
     const newTask = {
@@ -141,8 +119,6 @@ class Dashboard extends React.Component {
 
 // @TO_DO after db connection: editTask
 
- 
-
   // Delete task
   deleteTask = (id, e) => {
     e.preventDefault()
@@ -158,33 +134,33 @@ class Dashboard extends React.Component {
         <MainNav links={this.state.dashLinks} />
       <div className="flex-center-column dashboard">
         <Route exact path='/dashboard' render={props => (
-          <Tasks updateNav={this.updateNav}  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />   
+          <Tasks /* updateNav={this.updateNav} */  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />   
         )} />
-        <Route exact path="/dashboard/new_task" render={props => (
+        <Switch>
+        <Route exact path="/new_task" render={props => (
                 
-                 <AddForm updateNav={this.updateNav}  addTask = { this.addTask}  />
+                 <AddForm /* updateNav={this.updateNav} */  addTask = { this.addTask}  />
                 
                )} />
-         <Route exact path="/edit_task" render={props => (
-                    <EditForm updateNav={this.updateNav} />
-              )} />    
+         <Route  path="/edit_task" render={props => (<EditForm /* updateNav={this.updateNav} *//>)}/>    
 
             <Route exact path="/completed" render={props => (
-                      <CompletedTasks updateNav={this.updateNav}  tasks = {this.state.tasks} />
+                      <CompletedTasks /* updateNav={this.updateNav} */  tasks = {this.state.tasks} />
                    
                  )} /> 
-               <Route exact path="/settings/user_data" render={props => (
-                   <Settings updateNav={this.updateNav}>
+               <Route exact path="/dashboard/settings/user_data" render={props => (
+                   <Settings /* updateNav={this.updateNav} */>
                     <SettingsUserData />
                       </Settings>
                   
                )} />  
-                  <Route exact path="/settings/user_account" render={props => (
-                     <Settings updateNav={this.updateNav}>
+                  <Route exact path="/dashboard/settings/user_account" render={props => (
+                     <Settings /* updateNav={this.updateNav} */>
                       <SettingsAccount   />
                       </Settings>
                     
-                )} />        
+                )} />  
+                </Switch>      
     </div>
     </React.Fragment>
     )
