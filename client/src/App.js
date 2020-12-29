@@ -13,8 +13,18 @@ import './index.css';
 // Import components
 import Dashboard from './components/Dashboard';
 
+
+import AddForm from './components/AddForm';
+import EditForm from './components/EditForm';
+import CompletedTasks from './components/CompletedTasks';
+import MainNav from './components/MainNav';
+
+// import Settings from '../pages/settings_page/Settings';
+// import SettingsUserData from '../pages/settings_page/SettingsUserData';
+// import SettingsAccount from '../pages/settings_page/SettingsAccount';
+import Tasks from './components/Tasks';
+
 import SecondaryNav from './components/SecondaryNav';
-import AddForm from './components/AddForm'
 import Footer from './components/Footer';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -26,24 +36,110 @@ import setAuthToken from './utils/setAuthToken';
 import Alert from './components/Alert';
 
 export class App extends React.Component {
-
+ 
   constructor(){
     super()
     this.state = {
-   navTitle: "Dashboard"
+      isSignedIn: true,
+      // Temporary todo list before databse
+      tasks: [
+        {
+          id: uuid(),
+          title: "Walk the dog",
+          urgent: false,
+          completed: true
+          // @TO_DO Add category and completion status
+        },
+        {
+          id: uuid(),
+          title: "Wash the dishes",
+          urgent: true,
+          completed: false
+          // @TO_DO Add category and completion status
+        },
+        {
+          id: uuid(),
+          title: "Cook dinner",
+          urgent: false,
+          completed: false
+          // @TO_DO Add category and completion status
+        },
+        {
+          // @TO_DO Add random id generation
+          id: uuid(),
+          title: "Clean up",
+          urgent: false,
+          completed: false
+          // @TO_DO Add category and completion status
+        }
+      ],
+
+      // Navigation Links
+      dashLinks: [
+        {
+          key: uuid(),
+          linkTitle: "My Tasks",
+          linkPath: "/"
+        },
+        {
+          key: uuid(),
+          linkTitle: "Completed",
+          linkPath: "/completed"
+        }
+      ],
+      settLinks: [
+        {
+          key: uuid(),
+          linkTitle: "User",
+          linkPath: "/settings/user_data"
+        },
+        {
+          key: uuid(),
+          linkTitle: "Account",
+          linkPath: "/settings/user_account"
+        }
+      ],
+      navTitle: "Dashboard"
     }
   }
-  // Update navigtion title 
-  updateNav = (newTitle) => {
-    this.setState({navTitle: newTitle})
-    
+ // Update navigtion title 
+ updateNav = (newTitle) => {
+  this.setState({navTitle: newTitle})
+  
+}
+
+// Add task
+addTask = (title, urgent) => {
+  const newTask = {
+    id: uuid(),
+    title,
+    urgent
   }
+  this.setState({tasks: [...this.state.tasks, newTask]});
+}
+
+// Mark task completed
+markCompleted = (id) => {
+  this.setState({tasks: this.state.tasks.map(task => {
+    if(task.id === id){
+      task.completed = !task.completed 
+    }
+    return task
+  })});
+}
+
+// @TO_DO after db connection: editTask
+
+// Delete task
+deleteTask = (id, e) => {
+  e.preventDefault()
+  this.setState({tasks: [...this.state.tasks.filter(task => task.id !== id)]});
+  
+}
+
 componentDidMount(){
   store.dispatch(loadUser())
 }
-
-
-
   // Rendering application
   render() {
     if(localStorage.token){
@@ -66,13 +162,18 @@ componentDidMount(){
             {/* @TO_DO rebuild componet structure */}
 
             {/* Protefcted Route */}
-            {/* <PrivateRoute exact path="/dashboard" component={(props) => <Dashboard {...props.children} />} /> */}
-
-            <Route exact path="/dashboard" render={props => (
-            <Dashboard>
-              {props.children}
+            <PrivateRoute exact path="/dashboard" component={(props) => <Dashboard>
+              <MainNav links={this.state.dashLinks} />
+              <Tasks updateNav={this.updateNav}  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />
               </Dashboard>
-            )} />
+              } />
+            <PrivateRoute exact path="/new_task" component={(props) => <Dashboard>
+              <MainNav links={this.state.dashLinks} />
+              <AddForm updateNav={this.updateNav}  addTask = { this.addTask}  />
+              </Dashboard>
+              } />
+
+           
             </Switch>
           </div>
           <Footer />
@@ -91,3 +192,6 @@ componentDidMount(){
 
 
 export default App;
+
+
+
