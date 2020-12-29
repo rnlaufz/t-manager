@@ -38,9 +38,8 @@ import Alert from '../components/Alert'
     }
     
     // Redirect after registration 
-    // TEST THIS
     if(isAuthenticated){
-        return <Redirect to="/" />
+        return <Redirect to="/dashboard" />
     }
 
     return (

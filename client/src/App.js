@@ -104,12 +104,18 @@ export class App extends React.Component {
           linkPath: "/dashboard"
         }
       ],
-      navTitle: "Dashboard"
+      navTitle: store.dispatch({
+        type: "DASH_TITLE",
+        title: "Dashboard"
+      })
     }
   }
  // Update navigtion title 
  updateNav = (newTitle) => {
-  this.setState({navTitle: newTitle})
+  this.setState({navTitle: store.dispatch({
+    type: 'DASH_TITLE',
+    title: newTitle
+  })})
   
 }
 
@@ -156,13 +162,13 @@ componentDidMount(){
     <Provider store={store}> 
       <Router>
         <div className="container">
-          <SecondaryNav navTitle={this.state.navTitle} />
+          <SecondaryNav navTitle={this.state.navTitle.title} />
           <div className="wrapper">
-          <Route exact path="/" render={props =>(<Register navTitle={this.state.navTitle} /> )} />
+          <Route exact path="/" render={props =>(<Register /> )} />
             <Alert />
             <Switch>
-            <Route exact path="/login" render={props =>(<Login navTitle={this.state.navTitle} />)}/>
-            <Route exact path="/register" render={props =>(<Register navTitle={this.state.navTitle} /> )}/>
+            <Route exact path="/login" render={props =>(<Login  />)}/>
+            <Route exact path="/register" render={props =>(<Register  /> )}/>
             
             {/* @TO_DO rebuild componet structure */}
 
@@ -171,7 +177,7 @@ componentDidMount(){
             <React.Fragment>
                  <MainNav links={this.state.dashLinks} />
               <Dashboard>
-              <Tasks updateNav={this.updateNav}  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />
+              <Tasks  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />
               </Dashboard>
               </React.Fragment>
             
@@ -180,7 +186,7 @@ componentDidMount(){
               <React.Fragment>
                   <MainNav links={this.state.dashLinks} />
               <Dashboard>
-              <AddForm updateNav={this.updateNav}  addTask = { this.addTask}  />
+              <AddForm  addTask = { this.addTask} updateNav={this.updateNav} />
               </Dashboard>
                 </React.Fragment>
              
@@ -189,7 +195,7 @@ componentDidMount(){
             <React.Fragment>
                <MainNav links={this.state.dashLinks} />
             <Dashboard>
-              <EditForm updateNav={this.updateNav} />
+              <EditForm/>
               </Dashboard>
               </React.Fragment>
            
@@ -198,7 +204,7 @@ componentDidMount(){
              <React.Fragment>
                  <MainNav links={this.state.dashLinks} />
                  <Dashboard>
-            <CompletedTasks updateNav={this.updateNav}  tasks = {this.state.tasks} />
+            <CompletedTasks tasks = {this.state.tasks} />
             </Dashboard>
              </React.Fragment>
            
@@ -210,7 +216,7 @@ componentDidMount(){
                <React.Fragment>
                   <MainNav links={this.state.settLinks} />
                   <Dashboard>
-              <Settings updateNav={this.updateNav}>
+              <Settings >
               <SettingsUserData />
               </Settings>
               </Dashboard>
@@ -221,7 +227,7 @@ componentDidMount(){
                <React.Fragment>
                     <MainNav links={this.state.settLinks} />
                     <Dashboard>
-              <Settings updateNav={this.updateNav}>
+              <Settings>
               <SettingsAccount   />
               </Settings>
               </Dashboard>

@@ -1,17 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import store from '../store';
 
 export class AddForm extends Component {
     
     state = {
         title: '',
-        urgent: false,
-        navTitle: 'New Task'
+        urgent: false
     }
 
-   
-//   componentDidMount(){
-//       this.props.updateNav(this.state.navTitle)
-//   }
+   newTitle = "New Task"
+   loaded = false;
+   componentDidMount(){
+       this.loaded = true;
+   }
+ 
+ 
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -28,7 +31,9 @@ export class AddForm extends Component {
 
    
     render() {
-
+        if(this.loaded){
+            this.props.updateNav(this.newTitle)  
+           } 
         return (
             <React.Fragment>
                 <h3>Add new task:</h3>
