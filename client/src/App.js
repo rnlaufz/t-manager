@@ -19,9 +19,9 @@ import EditForm from './components/EditForm';
 import CompletedTasks from './components/CompletedTasks';
 import MainNav from './components/MainNav';
 
-// import Settings from '../pages/settings_page/Settings';
-// import SettingsUserData from '../pages/settings_page/SettingsUserData';
-// import SettingsAccount from '../pages/settings_page/SettingsAccount';
+import Settings from './pages/settings_page/Settings';
+import SettingsUserData from './pages/settings_page/SettingsUserData';
+import SettingsAccount from './pages/settings_page/SettingsAccount';
 import Tasks from './components/Tasks';
 
 import SecondaryNav from './components/SecondaryNav';
@@ -79,7 +79,7 @@ export class App extends React.Component {
         {
           key: uuid(),
           linkTitle: "My Tasks",
-          linkPath: "/"
+          linkPath: "/dashboard"
         },
         {
           key: uuid(),
@@ -96,7 +96,12 @@ export class App extends React.Component {
         {
           key: uuid(),
           linkTitle: "Account",
-          linkPath: "/settings/user_account"
+          linkPath: "/settings/manage_account"
+        },
+        {
+          key: uuid(),
+          linkTitle: "Dashboard",
+          linkPath: "/dashboard"
         }
       ],
       navTitle: "Dashboard"
@@ -162,17 +167,67 @@ componentDidMount(){
             {/* @TO_DO rebuild componet structure */}
 
             {/* Protefcted Route */}
-            <PrivateRoute exact path="/dashboard" component={(props) => <Dashboard>
-              <MainNav links={this.state.dashLinks} />
+            <PrivateRoute exact path="/dashboard" component={(props) => 
+            <React.Fragment>
+                 <MainNav links={this.state.dashLinks} />
+              <Dashboard>
               <Tasks updateNav={this.updateNav}  tasks = {this.state.tasks} deleteTask={this.deleteTask} markCompleted={this.markCompleted} />
               </Dashboard>
+              </React.Fragment>
+            
               } />
-            <PrivateRoute exact path="/new_task" component={(props) => <Dashboard>
-              <MainNav links={this.state.dashLinks} />
+            <PrivateRoute exact path="/new_task" component={(props) =>
+              <React.Fragment>
+                  <MainNav links={this.state.dashLinks} />
+              <Dashboard>
               <AddForm updateNav={this.updateNav}  addTask = { this.addTask}  />
               </Dashboard>
+                </React.Fragment>
+             
+              } />
+            <PrivateRoute exact path="/edit_task" component={(props) => 
+            <React.Fragment>
+               <MainNav links={this.state.dashLinks} />
+            <Dashboard>
+              <EditForm updateNav={this.updateNav} />
+              </Dashboard>
+              </React.Fragment>
+           
+              } />
+            <PrivateRoute exact path="/completed" component={(props) => 
+             <React.Fragment>
+                 <MainNav links={this.state.dashLinks} />
+                 <Dashboard>
+            <CompletedTasks updateNav={this.updateNav}  tasks = {this.state.tasks} />
+            </Dashboard>
+             </React.Fragment>
+           
               } />
 
+              {/* Settings */}
+
+              <PrivateRoute exact path="/settings/user_data" component={(props) => 
+               <React.Fragment>
+                  <MainNav links={this.state.settLinks} />
+                  <Dashboard>
+              <Settings updateNav={this.updateNav}>
+              <SettingsUserData />
+              </Settings>
+              </Dashboard>
+               </React.Fragment>
+             
+              } />
+              <PrivateRoute exact path="/settings/manage_account" component={(props) => 
+               <React.Fragment>
+                    <MainNav links={this.state.settLinks} />
+                    <Dashboard>
+              <Settings updateNav={this.updateNav}>
+              <SettingsAccount   />
+              </Settings>
+              </Dashboard>
+               </React.Fragment>
+           
+              } />
            
             </Switch>
           </div>

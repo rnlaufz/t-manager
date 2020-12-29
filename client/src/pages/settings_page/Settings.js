@@ -11,9 +11,9 @@ export class Settings extends Component {
     
       
     }
-    componentDidMount(){
-        this.props.updateNav(this.state.navTitle)
-    }
+    // componentDidMount(){
+    //     this.props.updateNav(this.state.navTitle)
+    // }
     render() {
         return (
             <React.Fragment>

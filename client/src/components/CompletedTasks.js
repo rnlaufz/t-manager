@@ -14,9 +14,9 @@ export class CompletedTasks extends Component {
 
 
 
-  componentDidMount(){
-      this.props.updateNav(this.state.navTitle)
-  }
+//   componentDidMount(){
+//       this.props.updateNav(this.state.navTitle)
+//   }
 
     noTasks = () => {
         this.setState({

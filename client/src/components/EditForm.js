@@ -9,9 +9,9 @@ export class EditForm extends Component {
         urgent: false
     }
 
-  componentDidMount(){
-      this.props.updateNav(this.state.navTitle)
-  }
+//   componentDidMount(){
+//       this.props.updateNav(this.state.navTitle)
+//   }
 
  
   
