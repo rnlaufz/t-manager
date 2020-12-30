@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store from '../store';
+
 
 export class AddForm extends Component {
     

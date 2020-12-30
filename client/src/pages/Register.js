@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import {Link, Redirect} from 'react-router-dom';
-import axios from 'axios'; 
 import {connect} from 'react-redux'; 
 import {setAlert} from '../actions/alert';
 import {register} from '../actions/auth';
