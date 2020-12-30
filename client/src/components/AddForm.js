@@ -10,12 +10,9 @@ export class AddForm extends Component {
 
    newTitle = "New Task"
    loaded = false;
-   componentDidMount(){
+   componentWillMount(){
        this.loaded = true;
    }
- 
- 
-
     onSubmit = (e) => {
         e.preventDefault();
         this.props.addTask(this.state.title, this.state.urgent);

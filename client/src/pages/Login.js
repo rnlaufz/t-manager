@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
+
 import {login} from '../actions/auth';
+
+
+import Alert from '../components/Alert';
 
 
 const Login = ({login, isAuthenticated}) =>  {
@@ -16,13 +20,15 @@ const Login = ({login, isAuthenticated}) =>  {
 
    const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
+
     const onSubmit = async e => {
         e.preventDefault();
-       login(email, password);
+         login(email, password)
+       
+    
     }
 
     // Redirect if logged in
-    // TEST THIS
     if(isAuthenticated){
         return <Redirect to="/dashboard" />
     }
@@ -36,6 +42,7 @@ const Login = ({login, isAuthenticated}) =>  {
         </div>
         <div className="flex-page">
             <div  className="flex-center-column login-content">
+                <Alert />
                 <div className="card flex-center-column">
                     <div  className="flex-center-column form-container-sign">
                         <h3>Sign In</h3>
@@ -66,11 +73,12 @@ const Login = ({login, isAuthenticated}) =>  {
 
 Login.propTypes = {
     login: propTypes.func.isRequired,
-    isAuthenticated: propTypes.bool
+    isAuthenticated: propTypes.bool,
+
 }
 
  const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
  })
 
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, { login})(Login);

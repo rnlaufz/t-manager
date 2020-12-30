@@ -26,7 +26,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/auth
-// @desc    Authenicate user && get token
+// @desc    Authenticate user && get token
 // @access  Public
 router.post('/', [
     check('email', 'Please enter a valid email').isEmail(),
@@ -48,14 +48,14 @@ async (req, res) => {
        let user = await User.findOne({email});
        
        if(!user){
-          return res.status(400).json({errors: [{message: "Invalid credentials"}]});
+          return res.status(401).json({errors: [{message: "Invalid email or password"}]});
        }
 
     //    Match the password and the email
        const isMatch = await bcrypt.compare(password, user.password);
 
        if(!isMatch){
-        return res.status(400).json({errors: [{message: "Invalid credentials"}]});
+        return res.status(401).json({errors: [{message: "Invalid email or password"}]});
        }
 
     // Return jsonwebtoken

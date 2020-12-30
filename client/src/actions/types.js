@@ -13,4 +13,8 @@ export const LOGOUT = "LOGOUT";
 
 // Dashboard navigation
 export const DASH_TITLE = "DASH_TITLE";
+export const ADD_TITLE = "ADD_TITLE";
+export const EDIT_TITLE = "EDIT_TITLE";
+export const SETTINGS_TITLE = "SETTINGS_TITLE";
+export const COMPLETED_TITLE = "COMPLETED_TITLE";
 

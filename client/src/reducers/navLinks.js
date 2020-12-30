@@ -1,4 +1,4 @@
-import {DASH_TITLE} from '../actions/types';
+import {DASH_TITLE, ADD_TITLE, SETTINGS_TITLE, COMPLETED_TITLE, EDIT_TITLE} from '../actions/types';
 
 const inintialState = [];
 
@@ -7,7 +7,23 @@ export default function(state = inintialState, action){
     switch(type){
         case DASH_TITLE:
             return [...state,
-                {title: action.text}
+                {title: "Dashboard"}
+            ];    
+        case ADD_TITLE:
+            return [...state,
+                {title: "New Task"}
+            ];    
+        case EDIT_TITLE:
+            return [...state,
+                {title: "Edit"}
+            ];    
+        case SETTINGS_TITLE:
+            return [...state,
+                {title: "Settings"}
+            ];    
+        case COMPLETED_TITLE:
+            return [...state,
+                {title: "Completed"}
             ];    
         default:
             return state;    

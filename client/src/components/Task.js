@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom"
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,7 +29,7 @@ export class Task extends Component {
 
 // Prop types
 Task.propTypes = {
-    task: PropTypes.object.isRequired
+    task: propTypes.object.isRequired
 }
 
 export default Task

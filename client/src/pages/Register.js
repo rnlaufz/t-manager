@@ -61,7 +61,7 @@ import Alert from '../components/Alert'
                             </div>
                             <div className="form-item">
                                 <label htmlFor="email" className="block">Email</label>
-                                <input className="form-control" type="email" id="email" name="email" value={email} onChange={e => onChange(e)} />
+                                <input className="form-control"  id="email" name="email" value={email} onChange={e => onChange(e)} />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="password" className="block">Password</label>

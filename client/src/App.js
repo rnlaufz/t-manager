@@ -165,7 +165,6 @@ componentDidMount(){
           <SecondaryNav navTitle={this.state.navTitle.title} />
           <div className="wrapper">
           <Route exact path="/" render={props =>(<Register /> )} />
-            <Alert />
             <Switch>
             <Route exact path="/login" render={props =>(<Login  />)}/>
             <Route exact path="/register" render={props =>(<Register  /> )}/>
