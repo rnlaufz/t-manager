@@ -2,10 +2,10 @@ import {combineReducers} from 'redux';
 
 import alert from './alert';
 import auth from './auth';
-import navLinks from './navLinks';
+import navTitle from './navTitle';
 
 export default combineReducers({
     alert,
     auth,
-    navLinks
+    navTitle
 });

@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 import Task from "./Task"
-
+import { connect } from 'react-redux'
+import {setNavTitle} from '../actions/navTitle'
 
 export class Tasks extends Component {
-
-   
-    state = {
-        navTitle: "Dashboard"
-    }
-
-//   componentDidMount(){
-//       this.props.updateNav(this.state.navTitle)
-//   }
+  componentDidMount(){
+     this.props.setNavTitle("Dashboard");
+  }
 
     render() {
         
@@ -38,7 +33,12 @@ export class Tasks extends Component {
 
 // Prop types
 Tasks.propTypes = {
-    tasks: PropTypes.array.isRequired
+    tasks: propTypes.array.isRequired,
+    setNavTitle: propTypes.func.isRequired,
 }
 
-export default Tasks
+const mapStateToProps = state => ({
+    navTitle: state.navTitle.title
+})
+
+export default connect(mapStateToProps, {setNavTitle})(Tasks)

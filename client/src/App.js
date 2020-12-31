@@ -104,20 +104,12 @@ export class App extends React.Component {
           linkPath: "/dashboard"
         }
       ],
-      navTitle: store.dispatch({
-        type: "DASH_TITLE",
-        title: "Dashboard"
-      })
+     
     }
   }
- // Update navigtion title 
- updateNav = (newTitle) => {
-  this.setState({navTitle: store.dispatch({
-    type: 'DASH_TITLE',
-    title: newTitle
-  })})
+
   
-}
+
 
 // Add task
 addTask = (title, urgent) => {
@@ -162,7 +154,7 @@ componentDidMount(){
     <Provider store={store}> 
       <Router>
         <div className="container">
-          <SecondaryNav navTitle={this.state.navTitle.title} />
+          <SecondaryNav />
           <div className="wrapper">
           <Route exact path="/" render={props =>(<Register /> )} />
             <Switch>

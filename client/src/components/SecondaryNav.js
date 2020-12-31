@@ -3,16 +3,17 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 import {logout} from '../actions/auth';
-
+import {setNavTitle} from '../actions/navTitle'
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCog, faPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 
+
 // @TO_DO change component to class base
 
-const SecondaryNav = ({auth: {isAuthenticated, loading}, logout, navTitle}) => {
+const SecondaryNav = ({auth: {isAuthenticated, loading}, navTitle: {navTitle}, logout, props}) => {
   const authLinks = (
     <ul className="flex-center-row">
        <li><Link to='/new_task'><i><FontAwesomeIcon icon={faPlus} /></i></Link></li>
@@ -33,7 +34,7 @@ const registerLinks = (
   return (
     <div className="flex-center-row secondary-nav">
     {/* Fix func */}
-  <h2> <Link to={isAuthenticated ? "/dashboard" : "/"} className="logo title"> T-manager </Link> | <React.Fragment>{isAuthenticated ? navTitle : navTitle = "Welcome!"} </React.Fragment> </h2>
+  <h2> <Link to={isAuthenticated ? "/dashboard" : "/login"} className="logo title"> T-manager </Link> | {navTitle}</h2>
  <React.Fragment>{ isAuthenticated ? authLinks : !isAuthenticated ? registerLinks : null}</React.Fragment>
 </div> 
   )
@@ -41,10 +42,12 @@ const registerLinks = (
 
 SecondaryNav.propTypes = {
   logout: propTypes.func.isRequired,
-  auth: propTypes.object.isRequired
+  auth: propTypes.object.isRequired,
+  navTitle: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  navTitle: state.navTitle
 })
-export default connect(mapStateToProps, {logout})(SecondaryNav);
+export default connect(mapStateToProps, {logout, setNavTitle})(SecondaryNav);

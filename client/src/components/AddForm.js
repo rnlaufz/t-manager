@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import {setNavTitle} from '../actions/navTitle'
 
 export class AddForm extends Component {
     
@@ -8,11 +9,10 @@ export class AddForm extends Component {
         urgent: false
     }
 
-   newTitle = "New Task"
-   loaded = false;
-   componentWillMount(){
-       this.loaded = true;
-   }
+    componentDidMount(){
+        this.props.setNavTitle("New Task");
+     }
+
     onSubmit = (e) => {
         e.preventDefault();
         this.props.addTask(this.state.title, this.state.urgent);
@@ -28,9 +28,6 @@ export class AddForm extends Component {
 
    
     render() {
-        if(this.loaded){
-            this.props.updateNav(this.newTitle)  
-           } 
         return (
             <React.Fragment>
                 <h3>Add new task:</h3>
@@ -67,4 +64,9 @@ export class AddForm extends Component {
     }
 }
 
-export default AddForm
+const mapStateToProps = state => ({
+    navTitle: state.navTitle.title
+})
+
+
+export default connect(mapStateToProps, {setNavTitle})(AddForm)
