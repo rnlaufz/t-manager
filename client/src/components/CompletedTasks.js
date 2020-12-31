@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CompletedTask from './CompletedTask'
-
+import { connect } from 'react-redux';
+import {setNavTitle} from '../actions/navTitle';
 
 
 // @TO_DO: add clear all button
@@ -8,15 +9,12 @@ import CompletedTask from './CompletedTask'
 export class CompletedTasks extends Component {
 
     state = {
-        noTasks: false,
-        navTitle: "Completed"
+        noTasks: false
     }
+    componentDidMount(){
+        this.props.setNavTitle("Completed");
+     }
 
-
-
-//   componentDidMount(){
-//       this.props.updateNav(this.state.navTitle)
-//   }
 
     noTasks = () => {
         this.setState({
@@ -46,4 +44,8 @@ export class CompletedTasks extends Component {
     }
 }
 
-export default CompletedTasks
+const mapStateToProps = state => ({
+    navTitle: state.navTitle.title
+})
+
+export default connect(mapStateToProps, {setNavTitle})(CompletedTasks)

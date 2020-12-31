@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import {setNavTitle} from '../actions/navTitle';
 
 export class EditForm extends Component {
 
 
     state = {
-        navTitle: "Edit",
         taskTitle: 'Task',
         urgent: false
     }
 
-//   componentDidMount(){
-//       this.props.updateNav(this.state.navTitle)
-//   }
-
- 
-  
-    
+    componentDidMount(){
+        this.props.setNavTitle("Edit");
+     }
 
     render() {
         return (
@@ -44,4 +41,9 @@ export class EditForm extends Component {
     }
 }
 
-export default EditForm
+const mapStateToProps = state => ({
+    navTitle: state.navTitle.title
+})
+
+
+export default connect(mapStateToProps, {setNavTitle})(EditForm)

@@ -1,19 +1,12 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux';
+import {setNavTitle} from '../../actions/navTitle';
 
 export class Settings extends Component {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            navTitle: "Settings"
-        }
-    
-      
-    }
-    // componentDidMount(){
-    //     this.props.updateNav(this.state.navTitle)
-    // }
+    componentDidMount(){
+        this.props.setNavTitle("Settings");
+     }
     render() {
         return (
             <React.Fragment>
@@ -23,4 +16,9 @@ export class Settings extends Component {
     }
 }
 
-export default Settings
+const mapStateToProps = state => ({
+    navTitle: state.navTitle.title
+})
+
+
+export default connect(mapStateToProps, {setNavTitle})(Settings)
