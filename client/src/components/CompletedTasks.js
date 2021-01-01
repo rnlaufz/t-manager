@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CompletedTask from './CompletedTask'
 import { connect } from 'react-redux';
+import propTypes from 'prop-types'
 import {setNavTitle} from '../actions/navTitle';
 
 
@@ -42,6 +43,10 @@ export class CompletedTasks extends Component {
             </React.Fragment>
         )
     }
+}
+
+CompletedTasks.propTypes = {
+    setNavTitle: propTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

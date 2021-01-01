@@ -13,8 +13,11 @@ export const LOGOUT = "LOGOUT";
 
 // Dashboard navigation
 export const DASH_TITLE = "DASH_TITLE";
-export const ADD_TITLE = "ADD_TITLE";
-export const EDIT_TITLE = "EDIT_TITLE";
-export const SETTINGS_TITLE = "SETTINGS_TITLE";
-export const COMPLETED_TITLE = "COMPLETED_TITLE";
+
+
+// Tasks managing
+export const GET_TASKS = "GET_TASKS";
+export const NEW_TASK = "NEW_TASK";
+export const EDIT_TASK = "EDIT_TASK";
+export const DELETE_TASK = "DELETE_TASK";
 

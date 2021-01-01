@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {setNavTitle} from '../actions/navTitle'
 
@@ -62,6 +63,10 @@ export class AddForm extends Component {
            </React.Fragment>
         )
     }
+}
+
+AddForm.propTypes = {
+    setNavTitle: propTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
