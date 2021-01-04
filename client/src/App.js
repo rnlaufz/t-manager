@@ -41,39 +41,6 @@ export class App extends React.Component {
     super()
     this.state = {
       isSignedIn: true,
-      // Temporary todo list before databse
-      tasks: [
-        {
-          id: uuid(),
-          title: "Walk the dog",
-          urgent: false,
-          completed: true
-          // @TO_DO Add category and completion status
-        },
-        {
-          id: uuid(),
-          title: "Wash the dishes",
-          urgent: true,
-          completed: false
-          // @TO_DO Add category and completion status
-        },
-        {
-          id: uuid(),
-          title: "Cook dinner",
-          urgent: false,
-          completed: false
-          // @TO_DO Add category and completion status
-        },
-        {
-          // @TO_DO Add random id generation
-          id: uuid(),
-          title: "Clean up",
-          urgent: false,
-          completed: false
-          // @TO_DO Add category and completion status
-        }
-      ],
-
       // Navigation Links
       dashLinks: [
         {
@@ -121,6 +88,9 @@ addTask = (title, urgent) => {
   this.setState({tasks: [...this.state.tasks, newTask]});
 }
 
+// @TO_DO editTask
+
+// @TO_DO rewrite functions to work via redux 
 // Mark task completed
 markCompleted = (id) => {
   this.setState({tasks: this.state.tasks.map(task => {
@@ -131,7 +101,7 @@ markCompleted = (id) => {
   })});
 }
 
-// @TO_DO after db connection: editTask
+
 
 // Delete task
 deleteTask = (id, e) => {

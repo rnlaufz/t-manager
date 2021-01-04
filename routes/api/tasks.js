@@ -48,15 +48,15 @@ async (req, res) => {
     
 });
 
-// @route   GET api/tasks
-// @desc    Get tasks 
+// @route   GET api/tasks/me
+// @desc    Get logged in user's tasks 
 // @access  Private
 
-router.get('/', auth, async (req, res) => {
+router.get('/me', auth, async (req, res) => {
 
     try {
 
-        const tasks = await Task.find().sort({date: -1});
+        const tasks = await Task.find({user: req.user.id}).sort({date: -1});
         res.json(tasks)
         
     } catch (err) {
