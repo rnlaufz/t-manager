@@ -1,4 +1,4 @@
-import {GET_TASKS, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
+import {GET_TASKS, GET_TASK, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
 import axios from "axios";
 
 import {setAlert} from './alert'
@@ -19,6 +19,10 @@ export const getTasks = () => async dispatch => {
             payload: {message: err.response.statusText, status: err.response.status}
         });
     }
+}
+
+export const getTaskData = (id, title, urgent, completed) => dispatch => {
+    console.log(id, title, urgent, completed)
 }
 
 export const newTask = (title, urgent, completed) => async dispatch => {

@@ -17,7 +17,7 @@ const AddForm = ({newTask, setNavTitle}) => {
     const {title, completed, urgent} = formData;
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
-    const setUrgent = e => setFormData({...formData, urgent: !urgent})
+    const setUrgent = () => setFormData({...formData, urgent: !urgent})
     const onSubmit = async e => {
         e.preventDefault()
         newTask(title, urgent, completed);

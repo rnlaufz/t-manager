@@ -10,7 +10,7 @@ import {getTasks} from "../actions/tasks"
 
 
 
-const Tasks = ({getTasks, auth, tasks, setNavTitle}, props) => {
+const Tasks = ({getTasks, auth, tasks, setNavTitle}) => {
     useEffect(() => {
         setNavTitle("Dashboard");
         getTasks();
@@ -30,31 +30,6 @@ const Tasks = ({getTasks, auth, tasks, setNavTitle}, props) => {
         </React.Fragment>)
 }
 
-
-// export class Tasks extends Component {
-//   componentDidMount(){
-//      this.props.setNavTitle("Dashboard");
-//   }
-
-//     render() {
-        
-//         return (
-//             <React.Fragment>
-               
-//         <div className="tasks-list-container">
-//         <h3>My Tasks:</h3>
-//         <ul className="tasks-list">
-//                 {this.props.tasks.map((task) => (
-//                     <Task key={task.id} task={task} deleteTask={this.props.deleteTask} markCompleted={this.props.markCompleted} 
-//                     />
-//                 ))}
-//                     </ul>
-//                 </div>    
-
-//             </React.Fragment>
-//         )
-//     }
-// }
 
 // Prop types
 Tasks.propTypes = {

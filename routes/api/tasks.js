@@ -61,6 +61,45 @@ router.get('/me', auth, async (req, res) => {
 
 })
 
+// @route   PUT api/tasks
+// @desc    UPDATE task 
+// @access  Private
+router.put('/', 
+[
+    auth, 
+    [
+       check('title', 'Task is required').not().isEmpty() 
+    ]
+], 
+async (req, res) => {
+    const errors = validationResult(req)
+    if(!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array()});
+    }
+
+    const {title, urgent, completed} = req.body
+
+    try {
+        const task = new Task({
+        title,
+        urgent,
+        completed,
+        user: req.user.id
+
+        })
+
+     await task.save();
+
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
+
+    
+});
+
+
+
 // @route   DELETE api/tasks
 // @desc    Delete task 
 // @access  Private
