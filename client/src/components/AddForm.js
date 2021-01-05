@@ -1,77 +1,72 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {setNavTitle} from '../actions/navTitle'
+import {setNavTitle} from '../actions/navTitle';
+import {newTask} from '../actions/tasks'
 
-export class AddForm extends Component {
-    
-    state = {
+
+
+const AddForm = ({newTask, setNavTitle}) => {
+    useEffect(() => setNavTitle("New Task"));
+    const [formData, setFormData] = useState({
         title: '',
-        urgent: false
+        urgent: false,
+        completed: false
+    });
+
+    const {title, completed, urgent} = formData;
+
+    const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
+    const setUrgent = e => setFormData({...formData, urgent: !urgent})
+    const onSubmit = async e => {
+        e.preventDefault()
+        newTask(title, urgent, completed);
+        setFormData({
+            title: '',
+            urgent: false,
+            completed: false
+        })
     }
 
-    componentDidMount(){
-        this.props.setNavTitle("New Task");
-     }
+    return (
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        this.props.addTask(this.state.title, this.state.urgent);
-        this.setState({title: ''})
-    }
-
-    onChange = (e) => this.setState({ [e.target.name]: e.target.value });
-    urgent = (e) => this.setState(({urgent}) => ({
-        urgent: !urgent
-    }));
-    
-
-
-   
-    render() {
-        return (
-            <React.Fragment>
-                <h3>Add new task:</h3>
-              <div className="form-container">
-                  <form onSubmit = {this.onSubmit}>
-                      {/* Add task */}
-                      <div>
-                          <label htmlFor="title" className="block">Task:</label>
-                          <input className="task form-control no-focus" name="title" type="text" value={this.state.title}  onChange={this.onChange} />
-                      </div>
-                      {/* Add category */}
-                      {/* <div>
-                          <label htmlFor="category" className="block">Select category:</label>
-                          <select className="form-control no-focus category" name="categories">
-                          {this.props.categories.map((category) => (
-                                <option key={category.id} category={category}>{category.categoryTitle}</option>
-                             ))}
-                          </select>
-                      </div> */}
-                      <div className="start">
-                          <label className="no-mg" htmlFor="urgent">Is it urgent?
-                          <br />
-                              <small>(don't check if not)</small>
-                          </label>
-                          <input type="checkbox" name="urgent" className="urgent" onChange={this.urgent} value={this.state.urgent} />
-                      </div>
-                      <div>
-                          <button className="form-control no-focus btn" type="submit">Add task</button>
-                      </div>
-                  </form>
+        <React.Fragment>
+        <h3>Add new task:</h3>
+      <div className="form-container">
+          <form onSubmit = {onSubmit}>
+              {/* Add task */}
+              <div>
+                  <label htmlFor="title" className="block">Task:</label>
+                  <input className="task form-control no-focus" name="title" type="text" value={title}  onChange={onChange} />
               </div>
-           </React.Fragment>
-        )
-    }
+              <div className="start">
+                  <label className="no-mg" htmlFor="urgent">Is it urgent?
+                  <br />
+                      <small>(don't check if not)</small>
+                  </label>
+                  <input type="checkbox" name="urgent" className="urgent" onChange={setUrgent} value={urgent} />
+              </div>
+              <div>
+                  <button className="form-control no-focus btn" type="submit">Add task</button>
+              </div>
+          </form>
+      </div>
+   </React.Fragment>
+
+    )
+
 }
+
+
 
 AddForm.propTypes = {
     setNavTitle: propTypes.func.isRequired,
+    newTask: propTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-    navTitle: state.navTitle.title
+    navTitle: state.navTitle.title,
 })
 
 
-export default connect(mapStateToProps, {setNavTitle})(AddForm)
+export default connect(mapStateToProps, {setNavTitle, newTask})(AddForm)

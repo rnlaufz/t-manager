@@ -6,11 +6,6 @@ const auth = require('../../middleware/auth');
 const Task = require('../../models/Task');
 const { find } = require('../../models/Task');
 
-
-
-
-
-
 // @route   POST api/tasks
 // @desc    Create task 
 // @access  Private

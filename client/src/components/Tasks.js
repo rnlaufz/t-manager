@@ -10,7 +10,7 @@ import {getTasks} from "../actions/tasks"
 
 
 
-const Tasks = ({getTasks, auth, tasks}, props) => {
+const Tasks = ({getTasks, auth, tasks, setNavTitle}, props) => {
     useEffect(() => {
         setNavTitle("Dashboard");
         getTasks();
@@ -22,7 +22,7 @@ const Tasks = ({getTasks, auth, tasks}, props) => {
     <h3>My Tasks:</h3>
     <ul className="tasks-list">
             {tasksObj.map((task) => (
-                <Task id={uuid()} key={uuid()} task={task} deleteTask={props.deleteTask} markCompleted={props.markCompleted} />
+                <Task id={uuid()} key={uuid()} task={task} />
             ))}
                 </ul>
             </div>    

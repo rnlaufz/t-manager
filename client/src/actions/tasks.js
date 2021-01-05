@@ -1,4 +1,4 @@
-import {GET_TASKS, NEW_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
+import {GET_TASKS, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
 import axios from "axios";
 
 import {setAlert} from './alert'
@@ -21,8 +21,27 @@ export const getTasks = () => async dispatch => {
     }
 }
 
-export const newTask = () => dispatch => {
-    return true;
+export const newTask = (title, urgent, completed) => async dispatch => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json '
+        }
+    }
+    const body = JSON.stringify({title, urgent, completed})
+   try {
+       const res = await axios.post('/api/tasks', body, config);
+       dispatch({
+           type: UPDATE_TASK,
+           payload: res.data
+       });
+       dispatch(getTasks());
+   }
+   catch(err){
+    dispatch({
+        type: TASK_ERROR,
+        payload: {message: err.response.statusText, status: err.response.status}
+    });
+   }
 }
 
 export const editTask = (id) => dispatch => {
