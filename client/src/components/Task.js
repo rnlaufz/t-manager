@@ -22,8 +22,10 @@ const Task = (props, {getTaskData}) => {
       const {_id, title, urgent, completed} = props.task;
 
     //   @TO_DO: fix notFuction issue
-      const sendData = () => {
-           getTaskData(_id, title, urgent, completed)     
+      const sendData = (e) => {
+        e.preventDefault()
+        props.getTaskData(_id, title, urgent, completed)     
+           
           
       }
  

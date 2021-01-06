@@ -2,7 +2,7 @@ import {GET_TASKS, GET_TASK,UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} fro
 
 const initialState = {
     tasks: [],
-    taskID: '',
+    taskToEdit: {},
     loading: true,
     error: {}
 }
@@ -25,7 +25,11 @@ export default function(state = initialState, action){
                 loading: false
             };
         case EDIT_TASK:
-            return true;
+            console.log(payload)
+            return {
+                ...state,
+                taskToEdit: payload
+            };
         case DELETE_TASK:
             return state.filter(task => task.id !== payload);
         case TASK_ERROR:

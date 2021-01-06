@@ -22,7 +22,16 @@ export const getTasks = () => async dispatch => {
 }
 
 export const getTaskData = (id, title, urgent, completed) => dispatch => {
-    console.log(id, title, urgent, completed)
+   const data = {
+       id: id, 
+       title: title, 
+       urgent: urgent, 
+       completed: completed
+    }
+    dispatch({
+        type: EDIT_TASK,
+        payload: data
+    })
 }
 
 export const newTask = (title, urgent, completed) => async dispatch => {
