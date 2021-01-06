@@ -66,12 +66,19 @@ router.get('/me', auth, async (req, res) => {
 // @route   PUT api/tasks
 // @desc    UPDATE task 
 // @access  Private
-router.put('/:id', auth, async (req, res) => {
-    const {title, urgent, completed} = req.body
+router.put('/:id', [
+    auth, 
+    [
+       check('title', 'Task is required').not().isEmpty() 
+    ]
+], async (req, res) => {
+    
     try {
     const id = await req.params.id;
-    // find record and modify 
-    res.json(await Task.findById(id));
+
+    const {title, urgent, completed} = req.body
+    // Find record and modify 
+    res.json(await Task.updateOne({_id: id}, {title: title, urgent: urgent, completed: completed, user: req.user.id}));
     
     } catch (err) {
         console.error(err.message);
@@ -85,22 +92,17 @@ router.put('/:id', auth, async (req, res) => {
 // @desc    Delete task 
 // @access  Private
 
-router.delete('/', auth, async (req, res) => {
-
+router.delete('/:id', auth, async (req, res) => {
     try {
-
-
-    // Takes all tasks which belong to logged in user
-    // Temporarily sends logged in user's tasks as the response 
-    // @TO_DO: delete task by ID given from React 
-    res.json(await Task.find({user: req.user.id}))
-
-    
-    
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error')
-    }
+        const id = await req.params.id;
+        // Find record and delete
+       const task = await Task.findById(id);
+        await task.remove()
+        res.status(200).send('Task deleted')
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server error')
+        }
 })
 
 
