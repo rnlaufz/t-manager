@@ -5,6 +5,8 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const Task = require('../../models/Task');
 const { find } = require('../../models/Task');
+const checkID = require('../../middleware/checkID');
+
 
 // @route   POST api/tasks
 // @desc    Create task 
@@ -64,39 +66,18 @@ router.get('/me', auth, async (req, res) => {
 // @route   PUT api/tasks
 // @desc    UPDATE task 
 // @access  Private
-router.put('/', 
-[
-    auth, 
-    [
-       check('title', 'Task is required').not().isEmpty() 
-    ]
-], 
-async (req, res) => {
-    const errors = validationResult(req)
-    if(!errors.isEmpty()) {
-        return res.status(400).json({errors: errors.array()});
-    }
-
+router.put('/:id', auth, async (req, res) => {
     const {title, urgent, completed} = req.body
-
     try {
-        const task = new Task({
-        title,
-        urgent,
-        completed,
-        user: req.user.id
-
-        })
-
-     await task.save();
-
+    const id = await req.params.id;
+    // find record and modify 
+    res.json(await Task.findById(id));
+    
     } catch (err) {
-        console.error(err.message)
+        console.error(err.message);
         res.status(500).send('Server error')
     }
-
-    
-});
+})
 
 
 

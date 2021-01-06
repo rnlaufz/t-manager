@@ -21,7 +21,7 @@ export const getTasks = () => async dispatch => {
     }
 }
 
-export const getTaskData = (id, title, urgent, completed) => dispatch => {
+export const getTaskData = (id, title, urgent, completed) => async dispatch => {
    const data = {
        id: id, 
        title: title, 
@@ -32,6 +32,17 @@ export const getTaskData = (id, title, urgent, completed) => dispatch => {
         type: EDIT_TASK,
         payload: data
     })
+
+    try{
+        const res = await axios.put(`/api/tasks/${id}`)
+    }
+    catch(err){
+        dispatch({
+            type: TASK_ERROR,
+            payload: {message: err.response.statusText, status: err.response.status}
+        })
+    }
+
 }
 
 export const newTask = (title, urgent, completed) => async dispatch => {
