@@ -31,7 +31,9 @@ export default function(state = initialState, action){
                 taskToEdit: payload
             };
         case DELETE_TASK:
-            return state.filter(task => task.id !== payload);
+            return {
+                ...state
+            }
         case TASK_ERROR:
             return {
                 ...state,

@@ -21,29 +21,7 @@ export const getTasks = () => async dispatch => {
     }
 }
 
-export const getTaskData = (id, title, urgent, completed) => async dispatch => {
-   const data = {
-       id: id, 
-       title: title, 
-       urgent: urgent, 
-       completed: completed
-    }
-    dispatch({
-        type: EDIT_TASK,
-        payload: data
-    })
 
-    try{
-        const res = await axios.put(`/api/tasks/${id}`)
-    }
-    catch(err){
-        dispatch({
-            type: TASK_ERROR,
-            payload: {message: err.response.statusText, status: err.response.status}
-        })
-    }
-
-}
 
 export const newTask = (title, urgent, completed) => async dispatch => {
     const config = {
@@ -68,11 +46,48 @@ export const newTask = (title, urgent, completed) => async dispatch => {
    }
 }
 
+export const getTaskData = (id, title, urgent, completed) => async dispatch => {
+    const data = {
+        id: id, 
+        title: title, 
+        urgent: urgent, 
+        completed: completed
+     }
+     dispatch({
+         type: EDIT_TASK,
+         payload: data
+     })
+ 
+     try{
+         const res = await axios.put(`/api/tasks/${id}`)
+     }
+     catch(err){
+         dispatch({
+             type: TASK_ERROR,
+             payload: {message: err.response.statusText, status: err.response.status}
+         })
+     }
+ 
+ }
+
 export const editTask = (id) => dispatch => {
     return true;
 }
 
-export const deleteTask = (id) => dispatch => {
-  return dispatch({type: DELETE_TASK, payload: id});
+// Each task component sends id of the task as a part of the url | function sends the url with id to the server 
+export const deleteTask = (id) => async dispatch => {
+    try{
+        const res = await axios.delete(`/api/tasks/${id}`)
+        dispatch({
+            type: DELETE_TASK
+        });
+    }
+    catch(err){
+        dispatch({
+            type: TASK_ERROR,
+            payload: {message: err.response.statusText, status: err.response.status}
+        })
+    }
+  
 }
 
