@@ -1,4 +1,4 @@
-import {GET_TASKS, GET_TASK, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
+import {GET_TASKS, GET_TASKDATA, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
 import axios from "axios";
 
 import {setAlert} from './alert'
@@ -54,19 +54,19 @@ export const getTaskData = (id, title, urgent, completed) => async dispatch => {
         completed: completed
      }
      dispatch({
-         type: EDIT_TASK,
+         type: GET_TASKDATA,
          payload: data
      })
  
-     try{
-         const res = await axios.put(`/api/tasks/${id}`)
-     }
-     catch(err){
-         dispatch({
-             type: TASK_ERROR,
-             payload: {message: err.response.statusText, status: err.response.status}
-         })
-     }
+    //  try{
+    //      const res = await axios.put(`/api/tasks/${id}`)
+    //  }
+    //  catch(err){
+    //      dispatch({
+    //          type: TASK_ERROR,
+    //          payload: {message: err.response.statusText, status: err.response.status}
+    //      })
+    //  }
  
  }
 

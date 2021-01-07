@@ -17,7 +17,7 @@ export const DASH_TITLE = "DASH_TITLE";
 
 // Tasks managing
 export const GET_TASKS = "GET_TASKS";
-export const GET_TASK = "GET_TASK";
+export const GET_TASKDATA = "GET_TASKDATA";
 export const UPDATE_TASK = "UPDATE_TASK";
 export const EDIT_TASK = "EDIT_TASK";
 export const DELETE_TASK = "DELETE_TASK";

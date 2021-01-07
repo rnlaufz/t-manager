@@ -25,12 +25,9 @@ const Task = (props) => {
       const {_id, title, urgent, completed} = props.task;
 
     // Send task data to the action for editing 
-      const sendData = (e) => {
-        e.preventDefault()
+      const sendData = () => {
         props.getTaskData(_id, title, urgent, completed)     
-           
-          
-      }
+ }
 
     // Click button to send tasks id to delete action 
     const deleteTask = async () => {
@@ -51,6 +48,8 @@ const Task = (props) => {
 Task.propTypes = {
     task: propTypes.object.isRequired,
     getTaskData: propTypes.func.isRequired,
+    deleteTask: propTypes.func.isRequired,
+    getTasks: propTypes.func.isRequired,
 }
 
 
