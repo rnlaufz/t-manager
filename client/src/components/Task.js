@@ -50,7 +50,11 @@ Task.propTypes = {
     getTaskData: propTypes.func.isRequired,
     deleteTask: propTypes.func.isRequired,
     getTasks: propTypes.func.isRequired,
+    taskToEdit: propTypes.object.isRequired,
 }
 
+const mapStateToProps = state => ({
+  taskToEdit: state.tasks.taskToEdit
+})
 
-export default connect(null, {getTaskData, deleteTask, getTasks})(Task)
+export default connect(mapStateToProps, {getTaskData, deleteTask, getTasks})(Task)

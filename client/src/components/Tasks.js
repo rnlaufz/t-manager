@@ -41,7 +41,7 @@ Tasks.propTypes = {
 
 const mapStateToProps = state => ({
     navTitle: state.navTitle.title,
-    tasks: state.tasks 
+    tasks: state.tasks,
 })
 
 export default connect(mapStateToProps, {setNavTitle, getTasks})(Tasks)

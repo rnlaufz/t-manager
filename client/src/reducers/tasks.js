@@ -2,7 +2,7 @@ import {GET_TASKS, GET_TASKDATA,UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR}
 
 const initialState = {
     tasks: [],
-    taskToEdit: {},
+    taskToEdit: null,
     loading: true,
     error: {}
 }
@@ -25,7 +25,6 @@ export default function(state = initialState, action){
                 loading: false
             };
         case GET_TASKDATA:
-            console.log(payload)
             return {
                 ...state,
                 taskToEdit: payload,

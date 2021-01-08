@@ -13,7 +13,7 @@ import {faCog, faPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 // @TO_DO change component to class base
 
-const SecondaryNav = ({auth: {isAuthenticated, loading}, navTitle: {navTitle}, logout, props}) => {
+const SecondaryNav = ({auth: {isAuthenticated, loading}, navTitle: {navTitle}, logout}) => {
   const authLinks = (
     <ul className="flex-center-row">
        <li><Link to='/new_task'><i><FontAwesomeIcon icon={faPlus} /></i></Link></li>

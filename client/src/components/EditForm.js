@@ -5,11 +5,15 @@ import {setNavTitle} from '../actions/navTitle';
 import {getTaskData} from '../actions/tasks';
 
 
-const EditForm = ({setNavTitle, getTaskData, match}) => {
+const EditForm = ({setNavTitle, taskToEdit:{taskToEdit}}) => {
     useEffect(() => {
-        setNavTitle("New Task")
+        setNavTitle("New Task");
+       async function fetchTask(){
+        const loaded =  await taskToEdit !== null
+        return loaded
+       }
+       fetchTask()
     });
-    // console.log(getTaskData(match.params.id))
     return (
                     <React.Fragment>
                         <h3>Edit Task</h3>
@@ -17,7 +21,7 @@ const EditForm = ({setNavTitle, getTaskData, match}) => {
                             <form >
                                 <div>
                                     <label htmlFor="task" className="block">Task:</label>
-                                    <input id="task" name="task" type="text" className="task form-control no-focus"  />
+                                    <input id="task" name="task" type="text" className="task form-control no-focus" value={taskToEdit.title} />
                                 </div>
                                 <div className="start">
                                     <label className="no-mg" htmlFor="urgent">Is it urgent?
@@ -44,7 +48,7 @@ EditForm.propTypes = {
 
 const mapStateToProps = state => ({
     navTitle: state.navTitle.title,
-    taskToEdit: state.taskToEdit
+    taskToEdit: state.tasks.taskToEdit
 })
 
 export default connect(mapStateToProps, {setNavTitle, getTaskData})(EditForm)
