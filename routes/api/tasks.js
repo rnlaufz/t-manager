@@ -62,8 +62,27 @@ router.get('/me', auth, async (req, res) => {
     }
 
 })
+// @route   GET api/tasks/id
+// @desc    Get logged in user's tasks 
+// @access  Private
 
-// @route   PUT api/tasks
+router.get('/:id', auth, async (req, res) => {
+
+    try {
+        const id = await req.params.id;
+
+        // Find record 
+       const task = await Task.findById(id);
+       res.json(task)
+        
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
+
+})
+
+// @route   PUT api/tasks/id
 // @desc    UPDATE task 
 // @access  Private
 router.put('/:id', [

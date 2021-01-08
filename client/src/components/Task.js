@@ -26,7 +26,7 @@ const Task = (props) => {
 
     // Send task data to the action for editing 
       const sendData = () => {
-        props.getTaskData(_id, title, urgent, completed)     
+        props.getTaskData(_id)     
  }
 
     // Click button to send tasks id to delete action 

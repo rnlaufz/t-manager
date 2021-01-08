@@ -5,11 +5,11 @@ import {setNavTitle} from '../actions/navTitle';
 import {getTaskData} from '../actions/tasks';
 
 
-const EditForm = (props) => {
+const EditForm = ({setNavTitle, getTaskData, match}) => {
     useEffect(() => {
-        props.setNavTitle("New Task")
+        setNavTitle("New Task")
     });
-    console.log()
+    // console.log(getTaskData(match.params.id))
     return (
                     <React.Fragment>
                         <h3>Edit Task</h3>

@@ -25,9 +25,11 @@ export default function(state = initialState, action){
                 loading: false
             };
         case GET_TASKDATA:
+            console.log(payload)
             return {
                 ...state,
-                taskToEdit: payload
+                taskToEdit: payload,
+                loading: false
             };
         case DELETE_TASK:
             return {
