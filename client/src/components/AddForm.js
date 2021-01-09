@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {setNavTitle} from '../actions/navTitle';
-import {newTask} from '../actions/tasks'
+import {newTask} from '../actions/task'
 
 
 

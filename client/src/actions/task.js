@@ -1,4 +1,4 @@
-import {GET_TASKS, GET_TASKDATA, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
+import {GET_TASKS, GET_TASK, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from './types';
 import axios from "axios";
 
 import {setAlert} from './alert'
@@ -50,7 +50,7 @@ export const getTaskData = (id) => async dispatch => {
      try{
          const res = await axios.get(`/api/tasks/${id}`)
          dispatch({
-            type: GET_TASKDATA,
+            type: GET_TASK,
             payload: res.data
         })
      }

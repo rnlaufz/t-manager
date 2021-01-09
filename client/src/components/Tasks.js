@@ -6,22 +6,22 @@ import propTypes from 'prop-types'
 import Task from "./Task"
 import { connect } from 'react-redux'
 import {setNavTitle} from '../actions/navTitle'
-import {getTasks} from "../actions/tasks"
+import {getTasks} from "../actions/task"
 
 
 
-const Tasks = ({getTasks, auth, tasks, setNavTitle}) => {
+const Tasks = ({getTasks, auth, task: {tasks}, setNavTitle}) => {
     useEffect(() => {
         setNavTitle("Dashboard");
         getTasks();
     }, []); 
-    const tasksObj = tasks.tasks;
+    
     return ( <React.Fragment>
                
     <div className="tasks-list-container">
     <h3>My Tasks:</h3>
     <ul className="tasks-list">
-            {tasksObj.map((task) => (
+            {tasks.map((task) => (
                 <Task id={uuid()} key={uuid()} task={task} />
             ))}
                 </ul>
@@ -33,15 +33,14 @@ const Tasks = ({getTasks, auth, tasks, setNavTitle}) => {
 
 // Prop types
 Tasks.propTypes = {
-    tasks: propTypes.array.isRequired,
     setNavTitle: propTypes.func.isRequired,
     getTasks: propTypes.func.isRequired,
-    tasks: propTypes.object.isRequired,
+    task: propTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
     navTitle: state.navTitle.title,
-    tasks: state.tasks,
+    task: state.task,
 })
 
 export default connect(mapStateToProps, {setNavTitle, getTasks})(Tasks)

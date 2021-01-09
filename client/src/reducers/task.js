@@ -1,8 +1,8 @@
-import {GET_TASKS, GET_TASKDATA,UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from '../actions/types';
+import {GET_TASKS, GET_TASK,UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from '../actions/types';
 
 const initialState = {
     tasks: [],
-    taskToEdit: null,
+    task: null,
     loading: true,
     error: {}
 }
@@ -17,19 +17,20 @@ export default function(state = initialState, action){
                 ...state,
                 tasks: payload,
                 loading: false
-            };   
+            };  
+        case GET_TASK:
+                return {
+                    ...state,
+                    task: payload,
+                    loading: false
+                };     
         case UPDATE_TASK:
             return {
                 ...state,
                 tasks: payload,
                 loading: false
             };
-        case GET_TASKDATA:
-            return {
-                ...state,
-                taskToEdit: payload,
-                loading: false
-            };
+      
         case DELETE_TASK:
             return {
                 ...state

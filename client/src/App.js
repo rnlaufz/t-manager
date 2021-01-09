@@ -79,36 +79,27 @@ export class App extends React.Component {
 
 
 // Add task
-addTask = (title, urgent) => {
-  const newTask = {
-    id: uuid(),
-    title,
-    urgent
-  }
-  this.setState({tasks: [...this.state.tasks, newTask]});
-}
+// addTask = (title, urgent) => {
+//   const newTask = {
+//     id: uuid(),
+//     title,
+//     urgent
+//   }
+//   this.setState({tasks: [...this.state.tasks, newTask]});
+// }
 
 // @TO_DO editTask
 
 // @TO_DO rewrite functions to work via redux 
 // Mark task completed
-markCompleted = (id) => {
-  this.setState({tasks: this.state.tasks.map(task => {
-    if(task.id === id){
-      task.completed = !task.completed 
-    }
-    return task
-  })});
-}
-
-
-
-// Delete task
-deleteTask = (id, e) => {
-  e.preventDefault()
-  this.setState({tasks: [...this.state.tasks.filter(task => task.id !== id)]});
-  
-}
+// markCompleted = (id) => {
+//   this.setState({tasks: this.state.tasks.map(task => {
+//     if(task.id === id){
+//       task.completed = !task.completed 
+//     }
+//     return task
+//   })});
+// }
 
 componentDidMount(){
   store.dispatch(loadUser())
