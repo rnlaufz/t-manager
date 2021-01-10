@@ -62,8 +62,26 @@ export const getTaskData = (id) => async dispatch => {
      }
  }
 
-export const editTask = (id) => dispatch => {
-    return true;
+export const editTask = (id, title, urgent, completed) => async dispatch => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json '
+        }
+    }
+    const body = JSON.stringify({title, urgent, completed})
+    try{
+        const res = await axios.post(`/api/tasks/${id}`, body, config)
+        dispatch({
+           type: UPDATE_TASK,
+           payload: res.data
+       })
+    }
+    catch(err){
+        dispatch({
+            type: TASK_ERROR,
+            payload: {message: err.response.statusText, status: err.response.status}
+        })
+    }
 }
 
 // Each task component sends id of the task as a part of the url | function sends the url with id to the server 

@@ -25,6 +25,7 @@ export default function(state = initialState, action){
                     loading: false
                 };     
         case UPDATE_TASK:
+                console.log(payload)
             return {
                 ...state,
                 tasks: payload,

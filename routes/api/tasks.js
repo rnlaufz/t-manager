@@ -82,10 +82,10 @@ router.get('/:id', auth, async (req, res) => {
 
 })
 
-// @route   PUT api/tasks/id
+// @route   POST api/tasks/id
 // @desc    UPDATE task 
 // @access  Private
-router.put('/:id', [
+router.post('/:id', [
     auth, 
     [
        check('title', 'Task is required').not().isEmpty() 
@@ -98,7 +98,6 @@ router.put('/:id', [
     const {title, urgent, completed} = req.body
     // Find record and modify 
     res.json(await Task.updateOne({_id: id}, {title: title, urgent: urgent, completed: completed, user: req.user.id}));
-    
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error')
