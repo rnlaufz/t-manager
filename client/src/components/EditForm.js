@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback} from 'react'
 import propTypes from 'prop-types';
+import Loader from './Loader'
 import { connect } from 'react-redux';
 import {setNavTitle} from '../actions/navTitle';
 import {getTaskData, editTask, getTasks} from '../actions/task';
@@ -45,7 +46,7 @@ const EditForm = ({setNavTitle, getTaskData, editTask, getTasks, task: {task, lo
     return (
                     <React.Fragment>
                         {/* @TO_DO: add loading component */}
-                        {task === null ? (<h2>Loading</h2>) :
+                        {task === null ? (<Loader />) :
                       
                         <React.Fragment> <h3>Edit Task</h3>
                         <div className="form-container">
