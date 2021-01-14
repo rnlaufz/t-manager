@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'; 
 import {setAlert} from '../actions/alert';
 import {register} from '../actions/auth';
+import {setNavTitle} from '../actions/navTitle'
 
 import Alert from '../components/Alert'
 
- const Register = ({setAlert, register, isAuthenticated}) => {
-
+ const Register = ({setAlert, register, isAuthenticated, setNavTitle}) => {
+    useEffect(() => setNavTitle("Register"));
     const [formData, setFormData] = useState({
         name: "",
         email:  "",
@@ -88,13 +89,15 @@ import Alert from '../components/Alert'
 
 Register.propTypes = {
     setAlert: propTypes.func.isRequired,
+    setNavTitle: propTypes.func.isRequired,
     register: propTypes.func.isRequired,
     isAuthenticated: propTypes.bool
 }
 
  const mapStateToProps = state => ({
+    navTitle: state.navTitle.title,
     isAuthenticated: state.auth.isAuthenticated
  })
 
-export default connect(mapStateToProps, {setAlert, register})(Register)
+export default connect(mapStateToProps, {setAlert, register, setNavTitle})(Register)
 

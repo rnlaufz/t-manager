@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
-import {v4 as uuid} from 'uuid'
+import React, { useEffect } from 'react';
+import {v4 as uuid} from 'uuid';
 
-import propTypes from 'prop-types'
+import propTypes from 'prop-types';
 
-import Task from "./Task"
-import { connect } from 'react-redux'
-import {setNavTitle} from '../actions/navTitle'
-import {getTasks} from "../actions/task"
+import Loader from './Loader';
+import Task from "./Task";
+import { connect } from 'react-redux';
+import {setNavTitle} from '../actions/navTitle';
+import {getTasks} from "../actions/task";
 
 
 
@@ -20,12 +21,14 @@ const Tasks = ({getTasks, auth, task: {tasks}, setNavTitle}) => {
                
     <div className="tasks-list-container">
     <h3>My Tasks:</h3>
-    <ul className="tasks-list">
+        {tasks ?  
+        <ul className="tasks-list">
             {tasks.map((task) => (
                 <Task id={uuid()} key={uuid()} task={task} />
             ))}
-                </ul>
-            </div>    
+        </ul> : 
+        <Loader />}
+    </div>    
 
         </React.Fragment>)
 }

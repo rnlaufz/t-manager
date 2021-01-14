@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 
 import {login} from '../actions/auth';
-
+import {setNavTitle} from '../actions/navTitle'
 
 import Alert from '../components/Alert';
 
 
-const Login = ({login, isAuthenticated}) =>  {
-
+const Login = ({login, isAuthenticated, setNavTitle}) =>  {
+    useEffect(() => setNavTitle("Login"));
     const [formData, setFormData] = useState({
         email:  "",
         password: "",
@@ -74,11 +74,13 @@ const Login = ({login, isAuthenticated}) =>  {
 Login.propTypes = {
     login: propTypes.func.isRequired,
     isAuthenticated: propTypes.bool,
+    setNavTitle: propTypes.func.isRequired,
 
 }
 
  const mapStateToProps = state => ({
+    navTitle: state.navTitle.title,
     isAuthenticated: state.auth.isAuthenticated
  })
 
-export default connect(mapStateToProps, { login})(Login);
+export default connect(mapStateToProps, {setNavTitle, login})(Login);

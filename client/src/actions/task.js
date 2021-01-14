@@ -69,6 +69,7 @@ export const editTask = (id, title, urgent, completed) => async dispatch => {
         }
     }
     const body = JSON.stringify({title, urgent, completed})
+    console.log(body)
     try{
         const res = await axios.post(`/api/tasks/${id}`, body, config)
         dispatch({
