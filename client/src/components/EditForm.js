@@ -13,7 +13,11 @@ let intialState = {
     completed: null
 }
 
-const EditForm = ({setNavTitle, getTaskData, editTask, getTasks, task: {task, loading}}) => {
+// @TO_DO: fix wrong data compilation -> {title:{id:--, ...} urgent: ---} - this is how it looks like and it shouldn't
+
+const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) => {
+    const [formData, setFormData] = useState(intialState);
+    
     useEffect(()=> {
         setNavTitle("New Task");
         if(!task) getTaskData();
@@ -22,44 +26,39 @@ const EditForm = ({setNavTitle, getTaskData, editTask, getTasks, task: {task, lo
             for(const key in taskData) {
                 if(key in taskData) taskData[key] = task[key]
             }  
-            intialState = {...taskData}
-            console.log(taskData)
         }
       },[task, loading, setNavTitle, getTaskData]);
-    const [formData, setFormData] = useState(intialState);
     
-    const {_id, title, completed, urgent} = formData;
+    const {_id, title, urgent, completed } = formData;
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
     const setUrgent = () => setFormData({...formData, urgent: !urgent})
     const onSubmit = async e => {
         e.preventDefault()
-        if(_id){
-            await editTask(_id, title, urgent, completed);
-        setFormData({
-            _id: '',
-            title: '',
-            urgent: false,
-            completed: false
-        })
-        }
+       editTask(formData, task, _id ? {_id, title, urgent, completed }: false)
+        // setFormData({
+        //     _id: '',
+        //     title: '',
+        //     urgent: false,
+        //     completed: false
+        // })
+      
     }
     return (
                     <React.Fragment>
-                        {/* @TO_DO: add loading component */}
-                        {task === null ?     (<Loader />)   :
+                        {task === null ? (<Loader />) :
                      <React.Fragment> <h3>Edit Task</h3>
                         <div className="form-container">
                             <form onSubmit={onSubmit}>
                                 <div>
                                     <label htmlFor="task" className="block">Task:</label>
-                                    <input id="task" name="task" type="text" className="task form-control no-focus" onChange={onChange} value={title}/>
+                                    <input id="task" name="task" type="text" className="task form-control no-focus" onChange={onChange} />
                                 </div>
                                 <div className="start">
                                     <label className="no-mg" htmlFor="urgent">Is it urgent?
                                         <br />
                                         <small>(don't check if not)</small>
                                     </label>
-                                    <input type="checkbox" name="urgent" id="urgent" checked={urgent}  onChange={setUrgent} />
+                                    <input type="checkbox" name="urgent" id="urgent"  onChange={setUrgent} />
                                 </div>
                                 <div>
                                     <button className="form-control no-focus btn" type="submit">Submit</button>
@@ -80,6 +79,7 @@ EditForm.propTypes = {
     getTaskData: propTypes.func.isRequired,
     editTask: propTypes.func.isRequired,
     getTasks: propTypes.func.isRequired,
+    task: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
