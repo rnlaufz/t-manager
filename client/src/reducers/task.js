@@ -9,7 +9,7 @@ const initialState = {
 
 export default function(state = initialState, action){
     const {type, payload} = action
-
+    
     // @TO_DO complete func for GET, EDIT, NEW
     switch(type){
         case GET_TASKS:
@@ -25,10 +25,12 @@ export default function(state = initialState, action){
                     loading: false
                 };     
         case UPDATE_TASK:
-                console.log(payload)
+               
+                const {_id, title, urgent, completed} = payload;
+                console.log(title)
             return {
                 ...state,
-                tasks: payload,
+                task: {_id, title, urgent, completed} ,
                 loading: false
             };
       

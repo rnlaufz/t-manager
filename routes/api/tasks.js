@@ -85,7 +85,7 @@ router.get('/:id', auth, async (req, res) => {
 // @route   POST api/tasks/id
 // @desc    UPDATE task 
 // @access  Private
-router.post('/:id', [
+router.put('/:id', [
     auth, 
     [
        check('title', 'Task is required').not().isEmpty() 
@@ -96,6 +96,7 @@ router.post('/:id', [
     const id = await req.params.id;
 
     const {title, urgent, completed} = req.body
+    console.log(req.body)
     // Find record and modify 
     res.json(await Task.updateOne({_id: id}, {title: title, urgent: urgent, completed: completed, user: req.user.id}));
     } catch (err) {

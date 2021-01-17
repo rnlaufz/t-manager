@@ -15,7 +15,7 @@ let intialState = {
 
 // @TO_DO: fix wrong data compilation -> {title:{id:--, ...} urgent: ---} - this is how it looks like and it shouldn't
 
-const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) => {
+const EditForm = ({setNavTitle, getTaskData, getTasks, editTask, task: {task, loading}}) => {
     const [formData, setFormData] = useState(intialState);
     
     useEffect(()=> {
@@ -34,7 +34,8 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
     const setUrgent = () => setFormData({...formData, urgent: !urgent})
     const onSubmit = async e => {
         e.preventDefault()
-       editTask(formData, task, _id ? {_id, title, urgent, completed }: false)
+       editTask(formData, task, _id ? {_id, title, urgent, completed }: false);
+       getTasks()
         // setFormData({
         //     _id: '',
         //     title: '',
@@ -77,6 +78,7 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
 EditForm.propTypes = {
     setNavTitle: propTypes.func.isRequired,
     getTaskData: propTypes.func.isRequired,
+    getTasks: propTypes.func.isRequired,
     editTask: propTypes.func.isRequired,
     getTasks: propTypes.func.isRequired,
     task: propTypes.object.isRequired
