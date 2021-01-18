@@ -18,13 +18,19 @@ let intialState = {
 // @TO_DO: fix wrong data compilation -> {title:{id:--, ...} urgent: ---} - this is how it looks like and it shouldn't
 
 const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) => {
-    const [formData, setFormData] = useState(intialState);
-    const {_id, title, urgent, completed, taskEdited } = formData;
+    const [formData, setFormData] = useState({
+    _id: '',
+    title: '',
+    urgent: false,
+    completed: false,
+    taskEdited: false
+    });
+    
     useEffect(()=> {
         setNavTitle("New Task");
         if(!task) getTaskData();
         if(!loading && task){ 
-            const taskData = {...intialState, _id: task._id};
+            const taskData = {...formData, _id: task._id};
             setFormData(task._id ? {...formData, _id: task._id} : false)
             for(const key in taskData) {
                 if(key in taskData) taskData[key] = task[key]
@@ -33,7 +39,7 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
         
       },[task, loading, setNavTitle, getTaskData]);
     
-   
+    const {_id, title, urgent, completed, taskEdited } = formData;
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
     const setUrgent = () => setFormData({...formData, urgent: !urgent});
     
@@ -43,32 +49,7 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
        editTask(formData, task, _id ? true && sendData : false);
        setFormData({...formData, taskEdited: !taskEdited})
     }
-    return (
-                    // <React.Fragment>
-                    //     {task === null ? (<Loader />) :
-                    //  <React.Fragment> <h3>Edit Task</h3>
-                    //     <div className="form-container">
-                    //         <form onSubmit={onSubmit}>
-                    //             <div>
-                    //                 <label htmlFor="title" className="block">Task:</label>
-                    //                 <input id="title" name="title" type="text" className="task form-control no-focus" onChange={onChange} />
-                    //             </div>
-                    //             <div className="start">
-                    //                 <label className="no-mg" htmlFor="urgent">Is it urgent?
-                    //                     <br />
-                    //                     <small>(don't check if not)</small>
-                    //                 </label>
-                    //                 <input type="checkbox" name="urgent" id="urgent"  onChange={setUrgent} />
-                    //             </div>
-                    //             <div>
-                    //                 <button className="form-control no-focus btn" type="submit">Submit</button>
-                    //             </div>
-                    //         </form>
-                    //     </div>
-                    //     </React.Fragment>
-                    //   }
-                        
-                    //  </React.Fragment>   
+    return (   
                      <React.Fragment>
                         {!taskEdited ? (task === null ? (<Loader />) :
                      <React.Fragment> <h3>Edit Task</h3>
@@ -76,14 +57,14 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
                             <form onSubmit={onSubmit}>
                                 <div>
                                     <label htmlFor="title" className="block">Task:</label>
-                                    <input id="title" name="title" type="text" className="task form-control no-focus" onChange={onChange} />
+                                    <input id="title" name="title" type="text" className="task form-control no-focus" value={title} onChange={onChange} />
                                 </div>
                                 <div className="start">
                                     <label className="no-mg" htmlFor="urgent">Is it urgent?
                                         <br />
                                         <small>(don't check if not)</small>
                                     </label>
-                                    <input type="checkbox" name="urgent" id="urgent"  onChange={setUrgent} />
+                                    <input type="checkbox" name="urgent" id="urgent" checked={urgent} onChange={setUrgent} />
                                 </div>
                                 <div>
                                     <button className="form-control no-focus btn" type="submit">Submit</button>
