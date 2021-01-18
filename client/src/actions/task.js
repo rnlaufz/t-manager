@@ -30,6 +30,7 @@ export const newTask = (title, urgent, completed) => async dispatch => {
         }
     }
     const body = JSON.stringify({title, urgent, completed})
+    
    try {
        const res = await axios.post('/api/tasks', body, config);
        dispatch({
@@ -63,17 +64,14 @@ export const getTaskData = (id) => async dispatch => {
  }
 
 //  id here works as a callback -> holds execution untill date sent to action
-export const editTask = (id, taskData) => async dispatch => {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json '
-        }
-    }
-    const sendID = taskData._id;
-    const body = JSON.stringify(taskData)
-
+export const editTask = (taskData) => async dispatch => {
+    // const config = {
+    //     headers: {
+    //         'Content-Type': 'application/json '
+    //     }
+    // }
     try{
-        const res = await axios.put(`/api/tasks/${sendID}`, body, config)
+        const res = await axios.post(`/api/tasks/update`, taskData)
         dispatch({
            type: UPDATE_TASK,
            payload: res.data

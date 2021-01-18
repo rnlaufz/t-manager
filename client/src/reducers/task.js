@@ -1,4 +1,4 @@
-import {GET_TASKS, GET_TASK,UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from '../actions/types';
+import {GET_TASKS, GET_TASK, UPDATE_TASK, EDIT_TASK, DELETE_TASK, TASK_ERROR} from '../actions/types';
 
 const initialState = {
     tasks: [],
@@ -25,12 +25,9 @@ export default function(state = initialState, action){
                     loading: false
                 };     
         case UPDATE_TASK:
-               
-                const {_id, title, urgent, completed} = payload;
-                console.log(title)
             return {
                 ...state,
-                task: {_id, title, urgent, completed} ,
+                task: payload,
                 loading: false
             };
       
