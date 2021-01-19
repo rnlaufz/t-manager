@@ -7,16 +7,6 @@ import {setNavTitle} from '../actions/navTitle';
 import {getTaskData, editTask} from '../actions/task';
 import { setAlert } from '../actions/alert';
 
-let intialState = {
-    _id: '',
-    title: '',
-    urgent: false,
-    completed: false,
-    taskEdited: false
-}
-
-// @TO_DO: fix wrong data compilation -> {title:{id:--, ...} urgent: ---} - this is how it looks like and it shouldn't
-
 const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) => {
     const [formData, setFormData] = useState({
     _id: '',
@@ -25,16 +15,16 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
     completed: false,
     taskEdited: false
     });
-    
     useEffect(()=> {
         setNavTitle("New Task");
         if(!task) getTaskData();
         if(!loading && task){ 
             const taskData = {...formData, _id: task._id};
-            setFormData(task._id ? {...formData, _id: task._id} : false)
             for(const key in taskData) {
                 if(key in taskData) taskData[key] = task[key]
+                if(key in formData) formData[key] = task[key]
             }  
+            setFormData(task._id ? {...formData, _id: task._id} : false)
         }
         
       },[task, loading, setNavTitle, getTaskData]);
@@ -57,14 +47,14 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
                             <form onSubmit={onSubmit}>
                                 <div>
                                     <label htmlFor="title" className="block">Task:</label>
-                                    <input id="title" name="title" type="text" className="task form-control no-focus" value={title} onChange={onChange} />
+                                    <input id="title" name="title" type="text" className="task form-control no-focus" value={title !=='' ? title : undefined} onChange={onChange} />
                                 </div>
                                 <div className="start">
                                     <label className="no-mg" htmlFor="urgent">Is it urgent?
                                         <br />
                                         <small>(don't check if not)</small>
                                     </label>
-                                    <input type="checkbox" name="urgent" id="urgent" checked={urgent} onChange={setUrgent} />
+                                    <input type="checkbox" name="urgent" id="urgent" checked={urgent ? urgent : false} onChange={setUrgent} />
                                 </div>
                                 <div>
                                     <button className="form-control no-focus btn" type="submit">Submit</button>

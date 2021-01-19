@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {setNavTitle} from '../actions/navTitle';
 import {newTask} from '../actions/task'
 
-
+// @TO_DO: redirect after adding the task
 
 const AddForm = ({newTask, setNavTitle}) => {
     useEffect(() => setNavTitle("New Task"));
