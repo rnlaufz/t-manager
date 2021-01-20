@@ -95,7 +95,7 @@ router.post('/update', [
     try {
     const {title, urgent, completed} = req.body
     // Find record and modify 
-    let task = await Task.updateOne({_id: req.body._id}, {title: title, urgent: urgent, completed: completed, user: req.user.id});
+    let task = await Task.updateOne({_id: req.body._id}, {title: title, urgent: urgent, completed: false, user: req.user.id});
     return res.json(task)
     } catch (err) {
         console.error(err.message);

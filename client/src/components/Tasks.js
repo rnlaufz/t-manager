@@ -21,10 +21,10 @@ const Tasks = ({getTasks, auth, task: {tasks}, setNavTitle}) => {
                
     <div className="tasks-list-container">
     <h3>My Tasks:</h3>
-        {tasks ?  
+        {tasks ?
         <ul className="tasks-list">
-            {tasks.map((task) => (
-                <Task id={uuid()} key={uuid()} task={task} />
+            {tasks.map((task) => ( !task.completed ?
+                <Task id={uuid()} key={uuid()} task={task} /> : null
             ))}
         </ul> : 
         <Loader />}
