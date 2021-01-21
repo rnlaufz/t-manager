@@ -7,49 +7,31 @@ import Loader from './Loader';
 import CompletedTask from "./CompletedTask";
 import { connect } from 'react-redux';
 import {setNavTitle} from '../actions/navTitle';
-import {getTasks} from "../actions/task";
+import {getCompleted} from "../actions/task";
 
 
 
-const CompletedTasks = ({getTasks, task: {tasks}, setNavTitle, checkCompleted}) => {
+const CompletedTasks = ({task: {tasks}, setNavTitle, getCompleted}) => {
 
-    const [compState, setCompState] = useState({
-        noCompleted: true 
-    })
-   
+  
     // @TO_DO: move checkCompleted to redux 
 
     useEffect(() => {
         setNavTitle("Completed");
-        checkCompleted = tasks.every(task => task.completed)
-        if(!checkCompleted){
-            setCompState({...compState, noCompleted: true})
-        } else {
-            setCompState({...compState, noCompleted: false})
-        }
-        getTasks();
-    }, [getTasks, checkCompleted]); 
+        getCompleted()
+    }, []); 
 
-    const {noCompleted} = compState;
     return ( <React.Fragment>
                
     <div className="tasks-list-container">
     <h3>Completed Tasks</h3>
-       {!noCompleted ? (tasks ?  
+        {tasks ?  
         <ul className="tasks-list">
-            {tasks.map((task) => ( task.completed ? 
+            {tasks.map((task) => ( 
                 <CompletedTask id={uuid()} key={uuid()} task={task} />
-            : null))}
+           ))}
         </ul> :
-        <Loader />) : <h3>You have yet to complete some tasks</h3>}
-     
-        {/* {tasks ?  
-        <ul className="tasks-list">
-            {tasks.map((task) => ( task.completed ? 
-                <CompletedTask id={uuid()} key={uuid()} task={task} />
-            : null))}
-        </ul> :
-        <Loader />} */}
+        <Loader />}
     </div>    
 
         </React.Fragment>)
@@ -59,7 +41,7 @@ const CompletedTasks = ({getTasks, task: {tasks}, setNavTitle, checkCompleted}) 
 // Prop types
 CompletedTasks.propTypes = {
     setNavTitle: propTypes.func.isRequired,
-    getTasks: propTypes.func.isRequired,
+    getCompleted: propTypes.func.isRequired,
     task: propTypes.object.isRequired,
 }
 
@@ -68,4 +50,4 @@ const mapStateToProps = state => ({
     task: state.task,
 })
 
-export default connect(mapStateToProps, {setNavTitle, getTasks})(CompletedTasks)
+export default connect(mapStateToProps, {setNavTitle, getCompleted})(CompletedTasks)

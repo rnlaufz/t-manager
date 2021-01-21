@@ -62,6 +62,27 @@ router.get('/me', auth, async (req, res) => {
     }
 
 })
+// @route   GET api/tasks/completed
+// @desc    Get logged in user's completed tasks 
+// @access  Private
+
+router.get('/completed', auth, async (req, res) => {
+
+    try {
+
+        // Get all current user's completed tasks
+        const tasks = await Task.find({user: req.user.id, completed: true}).sort({date: -1});
+        const ifCompleted = true;
+        // Find tasks with completed: true
+        console.log(tasks)
+        res.json(tasks)
+        
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
+
+})
 // @route   GET api/tasks/id
 // @desc    Get logged in user's tasks 
 // @access  Private
