@@ -72,9 +72,6 @@ router.get('/completed', auth, async (req, res) => {
 
         // Get all current user's completed tasks
         const tasks = await Task.find({user: req.user.id, completed: true}).sort({date: -1});
-        const ifCompleted = true;
-        // Find tasks with completed: true
-        console.log(tasks)
         res.json(tasks)
         
     } catch (err) {

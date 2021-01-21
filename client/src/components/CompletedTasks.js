@@ -11,7 +11,7 @@ import {getCompleted} from "../actions/task";
 
 
 
-const CompletedTasks = ({task: {tasks}, setNavTitle, getCompleted}) => {
+const CompletedTasks = ({task: {tasks, noCompletes}, setNavTitle, getCompleted}) => {
 
   
     // @TO_DO: move checkCompleted to redux 
@@ -24,7 +24,7 @@ const CompletedTasks = ({task: {tasks}, setNavTitle, getCompleted}) => {
     return ( <React.Fragment>
                
     <div className="tasks-list-container">
-    <h3>Completed Tasks</h3>
+    <h3>{!noCompletes ? "Completed tasks:" : "You have yet to complete some tasks"}</h3>
         {tasks ?  
         <ul className="tasks-list">
             {tasks.map((task) => ( 

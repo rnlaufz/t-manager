@@ -4,6 +4,7 @@ const initialState = {
     tasks: [],
     task: null,
     loading: true,
+    noCompletes: true,
     error: {}
 }
 
@@ -28,7 +29,8 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 tasks: payload,
-                loading: false
+                loading: false,
+                noCompletes: false
             }          
         case UPDATE_TASK:
             return {
