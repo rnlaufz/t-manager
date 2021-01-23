@@ -69,7 +69,6 @@ router.get('/me', auth, async (req, res) => {
 router.get('/completed', auth, async (req, res) => {
 
     try {
-
         // Get all current user's completed tasks
         const tasks = await Task.find({user: req.user.id, completed: true}).sort({date: -1});
         res.json(tasks)

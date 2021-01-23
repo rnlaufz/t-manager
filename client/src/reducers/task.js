@@ -26,11 +26,12 @@ export default function(state = initialState, action){
                     loading: false
                 };   
         case GET_COMPTASKS: 
+        console.log(payload)
             return {
                 ...state,
                 tasks: payload,
                 loading: false,
-                noCompletes: false
+                noCompletes: payload.length === 0 ? true : false
             }          
         case UPDATE_TASK:
             return {
