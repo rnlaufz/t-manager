@@ -26,7 +26,6 @@ export default function(state = initialState, action){
                     loading: false
                 };   
         case GET_COMPTASKS: 
-        console.log(payload)
             return {
                 ...state,
                 tasks: payload,

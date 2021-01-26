@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import {setNavTitle} from '../actions/navTitle';
 import {getTaskData, editTask} from '../actions/task';
 import { setAlert } from '../actions/alert';
+import Alert from './Alert';
 
-const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) => {
+const EditForm = ({setAlert, setNavTitle, getTaskData, editTask, task: {task, loading}}) => {
     const [formData, setFormData] = useState({
     _id: '',
     title: '',
@@ -37,12 +38,15 @@ const EditForm = ({setNavTitle, getTaskData, editTask, task: {task, loading}}) =
         e.preventDefault()
         const sendData = formData;
        editTask(formData, task, _id ? true && sendData : false);
+       setAlert('Task data changed', 'success')
        setFormData({...formData, taskEdited: !taskEdited})
     }
     return (   
                      <React.Fragment>
                         {!taskEdited ? (task === null ? (<Loader />) :
-                     <React.Fragment> <h3>Edit Task</h3>
+                     <React.Fragment>
+                         <Alert /> 
+                         <h3>Edit Task</h3>
                         <div className="form-container">
                             <form onSubmit={onSubmit}>
                                 <div>
@@ -74,6 +78,7 @@ EditForm.propTypes = {
     setNavTitle: propTypes.func.isRequired,
     getTaskData: propTypes.func.isRequired,
     editTask: propTypes.func.isRequired,
+    setAlert: propTypes.func.isRequired,
     task: propTypes.object.isRequired
 }
 
@@ -82,4 +87,4 @@ const mapStateToProps = state => ({
     task: state.task
 })
 
-export default connect(mapStateToProps, {setNavTitle, getTaskData, editTask})(EditForm)
+export default connect(mapStateToProps, {setNavTitle, setAlert, getTaskData, editTask})(EditForm)

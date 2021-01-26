@@ -119,6 +119,31 @@ router.post('/update', [
         res.status(500).send('Server error')
     }
 })
+// @route   POST api/tasks/id
+// @desc    UPDATE task | mark it completed
+// @access  Private
+router.post('/:id', [
+    auth, 
+    [
+       check('title', 'Task is required').not().isEmpty() 
+    ]
+], async (req, res) => {
+    
+    
+    try {
+        const id = await req.params.id;
+        let task = await Task.updateOne({_id: id}, {$set:{completed: true}}) 
+        return res.json(task)
+
+    // const {title, urgent, completed} = req.body
+    // // Find record and modify 
+    // let task = await Task.updateOne({_id: req.body._id}, {title: title, urgent: urgent, completed: false, user: req.user.id});
+    // return res.json(task)
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error')
+    }
+})
 
 
 

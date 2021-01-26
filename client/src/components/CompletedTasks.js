@@ -8,6 +8,7 @@ import CompletedTask from "./CompletedTask";
 import { connect } from 'react-redux';
 import {setNavTitle} from '../actions/navTitle';
 import {getCompleted} from "../actions/task";
+import Alert from './Alert';
 
 
 
@@ -22,7 +23,7 @@ const CompletedTasks = ({task: {tasks, noCompletes}, setNavTitle, getCompleted})
     }, []); 
 
     return ( <React.Fragment>
-               
+     <Alert />          
     <div className="tasks-list-container">
     <h3>{!noCompletes ? "Completed tasks:" : "You have yet to complete some tasks"}</h3>
         {tasks ?  

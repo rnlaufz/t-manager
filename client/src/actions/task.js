@@ -79,7 +79,7 @@ export const getTaskData = (id) => async dispatch => {
      }
  }
 
-//  id here works as a callback -> holds execution untill date sent to action
+//  Edit task
 export const editTask = (taskData) => async dispatch => {
     // const config = {
     //     headers: {
@@ -88,6 +88,22 @@ export const editTask = (taskData) => async dispatch => {
     // }
     try{
         const res = await axios.post(`/api/tasks/update`, taskData)
+        dispatch({
+           type: UPDATE_TASK,
+           payload: res.data
+       })
+    }
+    catch(err){
+        dispatch({
+            type: TASK_ERROR,
+            payload: {message: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+export const completeTask = (_id) => async dispatch => {
+    
+    try{
+        const res = await axios.post(`/api/tasks/${_id}`,)
         dispatch({
            type: UPDATE_TASK,
            payload: res.data

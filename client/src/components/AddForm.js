@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 import {setNavTitle} from '../actions/navTitle';
 import {newTask} from '../actions/task'
+import {setAlert} from '../actions/alert'
+import Alert from './Alert';
+
 
 // @TO_DO: redirect after adding the task
 
-const AddForm = ({newTask, setNavTitle}) => {
+const AddForm = ({newTask, setNavTitle, setAlert}) => {
     useEffect(() => setNavTitle("New Task"));
     const [formData, setFormData] = useState({
         title: '',
         urgent: false,
-        completed: false
+        completed: false,
+        added: false
     });
 
-    const {title, completed, urgent} = formData;
+    const {title, completed, urgent, added} = formData;
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
     const setUrgent = () => setFormData({...formData, urgent: !urgent})
@@ -26,12 +32,17 @@ const AddForm = ({newTask, setNavTitle}) => {
             urgent: false,
             completed: false
         })
+        setAlert("New task added", 'success')
+        setFormData({...formData, added: true})
     }
 
     return (
-
+        
         <React.Fragment>
-        <h3>Add new task:</h3>
+            {!added ? 
+            <React.Fragment>
+                <Alert />
+            <h3>Add new task:</h3>
       <div className="form-container">
           <form onSubmit = {onSubmit}>
               {/* Add task */}
@@ -51,6 +62,9 @@ const AddForm = ({newTask, setNavTitle}) => {
               </div>
           </form>
       </div>
+      </React.Fragment>
+       : <Redirect to="/" />}
+        
    </React.Fragment>
 
     )
@@ -62,6 +76,7 @@ const AddForm = ({newTask, setNavTitle}) => {
 AddForm.propTypes = {
     setNavTitle: propTypes.func.isRequired,
     newTask: propTypes.func.isRequired,
+    setAlert: propTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -69,4 +84,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, {setNavTitle, newTask})(AddForm)
+export default connect(mapStateToProps, {setNavTitle, newTask, setAlert})(AddForm)

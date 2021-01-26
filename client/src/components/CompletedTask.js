@@ -1,24 +1,25 @@
-import React, { Component } from 'react'
-import {Link} from "react-router-dom"
-import propTypes from 'prop-types'
+import React, { Component } from 'react';
+import {Link} from "react-router-dom";
+import propTypes from 'prop-types';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheck, faEdit, faExclamationCircle, faTrash} from '@fortawesome/free-solid-svg-icons';
 
-import {deleteTask} from "../actions/task"
-import {getCompleted} from "../actions/task"
-
+import {deleteTask} from "../actions/task";
+import {getCompleted} from "../actions/task";
+import {setAlert} from "../actions/alert";
 
 import { connect } from 'react-redux';
 
 
-const CompletedTask = ({getCompleted, deleteTask, task: {_id, title, urgent, completed}}) => {
+const CompletedTask = ({setAlert, getCompleted, deleteTask, task: {_id, title, urgent, completed}}) => {
    
     // Click button to send tasks id to delete action 
     const deleteSelectedTask = async () => {
      await deleteTask(_id);
-    getCompleted()
+    getCompleted();
+    setAlert("Task deleted", "danger")
     } 
  
     return (
@@ -34,7 +35,8 @@ CompletedTask.propTypes = {
     task: propTypes.object.isRequired,
     deleteTask: propTypes.func.isRequired,
     getCompleted: propTypes.func.isRequired,
+    setAlert: propTypes.func.isRequired,
 }
 
 
-export default connect(null, {deleteTask, getCompleted})(CompletedTask)
+export default connect(null, {deleteTask, getCompleted, setAlert})(CompletedTask)
