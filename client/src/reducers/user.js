@@ -1,8 +1,25 @@
-import {GET_USER, DELETE_USER_DATA, CHANGE_USER_DATA, DELETE_USER} from '../actions/types';
+import {DELETE_USER_DATA, CHANGE_USER_DATA, DELETE_USER} from '../actions/types';
 
-const initialState = []
+const initialState = {
+    
+}
 
 export default function(state = initialState, action){
     const {type, payload} = action;
-    return initialState
+    switch(type){
+        case DELETE_USER_DATA: 
+            return {
+                ...state,
+            };
+        case CHANGE_USER_DATA:
+            return {
+                ...state,
+            };
+        case DELETE_USER:
+            return {
+                ...state,
+            }       
+        default:
+            return state;
+    }
 }

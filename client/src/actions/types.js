@@ -25,6 +25,7 @@ export const DELETE_TASK = "DELETE_TASK";
 export const TASK_ERROR = "TASK_ERROR";
 
 // User data managing
+export const GET_USER = "GET_USER";
 export const CHANGE_USER_DATA = "CHANGE_USER_DATA"; 
 export const DELETE_USER_DATA = "DELETE_USER_DATA"; 
 export const DELETE_USER = "DELETE_USER"; 

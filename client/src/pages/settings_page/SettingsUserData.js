@@ -3,31 +3,36 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
 
+
  const SettingsUserData = () => {
     const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        passwordTwo: ''
+        nemail: '',
+        npassword: '',
+        npasswordTwo: ''
     });
 
-    const {email, password, passwordTwo} = formData;
+    const {nemail, npassword, npasswordTwo} = formData;
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
     const onSubmit = async e => {
         e.preventDefault();
-
-        if(email !== ''){
-            // Send new email
+        let conf = window.confirm("Change user data")
+        if(conf && nemail !== ''){
+        //   send email to the server
             setFormData({
                 name: "",
                 email:  "",
                 password: "",
                 passwordTwo: ""  
              })
+
+            console.log('email here')
         }
-        if(password !== '' && passwordTwo !== ''){
-            if(password !== passwordTwo){
+        if(conf && npassword !== '' && npasswordTwo !== ''){
+            console.log('password here')
+            if(npassword !== npasswordTwo){
+                console.log('no match')
                 // setAlert("Passwords do not match", 'danger')
             } else {
             //  send new password
@@ -45,23 +50,23 @@ import propTypes from 'prop-types';
     return (
         <React.Fragment>
         <div className="form-container">
-            <form>
+            <form onSubmit={onSubmit}>
         <h3>User data</h3>
       <div>
           <label htmlFor="u-email" className="block">Change email:</label>
-          <input id="u-email" name="u-email" type="text" className="form-control no-focus" placeholder="New email" />
+          <input name="nemail" type="text" className="form-control no-focus" placeholder="New email" onChange={onChange} />
       </div>
       <div>
-          <label htmlFor="u-password" className="block">Change password:</label>
-          <input id="u-password" name="u-password" type="password" className="form-control no-focus" placeholder="New password" />
+          <label htmlFor="password" className="block">Change password:</label>
+          <input name="npassword" type="password" className="form-control no-focus" placeholder="New password" onChange={onChange} />
       </div>
       <div>
-          <label htmlFor="u-password-confirm" className="block">Confirm new password:</label>
-          <input id="u-password-confirm" name="u-password-confirm" type="password" className="form-control no-focus" placeholder="New confirm new password" />
+          <label htmlFor="passwordTwo" className="block">Confirm new password:</label>
+          <input name="npasswordTwo" type="password" className="form-control no-focus" placeholder="New confirm new password" onChange={onChange} />
       </div>
      
       <div>
-          <button className="form-control no-focus btn" type="submit">Submit</button>
+          <input className="form-control no-focus btn" type="submit"  value={"Submit"} />
       </div>
       </form>
         </div>
@@ -70,11 +75,9 @@ import propTypes from 'prop-types';
 }
 
 // Prop types
-SettingsUserData.propTypes = {
-    setNavTitle: propTypes.func.isRequired,
-    getTasks: propTypes.func.isRequired,
-    task: propTypes.object.isRequired,
-}
+// SettingsUserData.propTypes = {
+//     getUser: propTypes.func.isRequired,
+// }
 
 // const mapStateToProps = state => ({
 //    
