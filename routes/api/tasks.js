@@ -110,7 +110,7 @@ router.post('/update', [
 ], async (req, res) => {
     
     try {
-    const {title, urgent, completed} = req.body
+    const {title, urgent, completed} = await req.body
     // Find record and modify 
     let task = await Task.updateOne({_id: req.body._id}, {title: title, urgent: urgent, completed: false, user: req.user.id});
     return res.json(task)
@@ -158,6 +158,21 @@ router.delete('/:id', auth, async (req, res) => {
        const task = await Task.findById(id);
         await task.remove()
         res.status(200).send('Task deleted')
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server error')
+        }
+})
+// @route   DELETE api/tasks
+// @desc    Delete all user's tasks
+// @access  Private
+
+router.delete('/', auth, async (req, res) => {
+    try {
+        const user = req.user.id;
+        // Find record and delete
+       const tasks = await Task.deleteMany({user: user});
+        res.status(200).send('Tasks deleted')
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server error')

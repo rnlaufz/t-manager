@@ -79,6 +79,29 @@ async (req, res) => {
     
 });
 
+// @route UPDATE api/user/update
+// @desc Change user data: email | password | both
+// @access Private 
+router.post('/update', auth, async(req, res) => {
+    
+    try {
+        const {email, password} = await req.body;
+       if(email !== ''){
+        let user = await User.updateOne({_id: req.user.id}, {$set:{email: email}}) 
+        return res.json(user)
+       } 
+       if(password !== ''){
+        const salt =  await bcrypt.genSalt(10);
+        const newpass = await bcrypt.hash(password, salt);   
+        let user = await User.updateOne({_id: req.user.id}, {$set:{password: newpass}}) 
+        return res.json(user)
+       }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error') 
+    }
+})
+
 // @route   DELETE api/user
 // @desc    Delete user
 // @access  Private
