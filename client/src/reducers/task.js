@@ -1,4 +1,4 @@
-import {GET_TASKS, GET_TASK, GET_COMPTASKS, UPDATE_TASK, DELETE_TASK, TASK_ERROR} from '../actions/types';
+import {GET_TASKS, GET_TASK, GET_COMPTASKS, UPDATE_TASK, DELETE_TASK, DELETE_USER_DATA, TASK_ERROR} from '../actions/types';
 
 const initialState = {
     tasks: [],
@@ -40,6 +40,7 @@ export default function(state = initialState, action){
             };
       
         case DELETE_TASK:
+        case DELETE_USER_DATA:    
             return {
                 ...state
             }

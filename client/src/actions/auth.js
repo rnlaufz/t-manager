@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import {setAlert} from "./alert";
 
-import {REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT} from './types';
+import {REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, CHANGE_USER_DATA, DELETE_USER} from './types';
+
 import setAuthToken from '../utils/setAuthToken'
 
 // Load user 
@@ -84,6 +85,23 @@ export const login = (email, password) => async dispatch => {
         dispatch({
             type: LOGIN_FAIL
         });
+    }
+};
+
+// Change user email or password 
+export const updateUserData = (body) => async dispatch => {
+    try {
+        const res = await axios.post('/api/users/update', body);
+        dispatch({
+            type: CHANGE_USER_DATA,
+            payload: res.data
+        });
+    } catch (err) {
+        const errors = err.response.data.errors;
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.message, "danger")));
+        }
+
     }
 };
 
