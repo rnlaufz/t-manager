@@ -363,6 +363,10 @@ body {
     opacity: 0.7;
 }
 
+.data-actions ul li button:focus {
+    outline: none;
+}
+
 /* Footer */
 .footer {
     position: fixed;

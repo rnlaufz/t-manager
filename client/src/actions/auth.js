@@ -105,6 +105,21 @@ export const updateUserData = (body) => async dispatch => {
     }
 };
 
+export const deleteUser = () =>async  dispatch => {
+    try {
+        const res = await axios.delete('/api/users');
+        dispatch({
+            type: DELETE_USER
+        })
+        
+    } catch (err) {
+        const errors = err.response.data.errors;
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.message, "danger")));
+        }
+    }
+}
+
 // Logout 
 export const logout = () => dispatch => {
     dispatch({type: LOGOUT});

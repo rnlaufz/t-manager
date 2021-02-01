@@ -108,12 +108,8 @@ router.post('/update', auth, async(req, res) => {
 
 router.delete('/', auth, async (req, res) => {
     
-    const {id} = req.body
     try {
-        // Remove user 
-        // Find user
-        let user = await User.findOne({id});
-       
+        // Remove currently logged in user 
         await User.findOneAndDelete({_id: req.user.id});
 
         res.json({message: "User removed"})
