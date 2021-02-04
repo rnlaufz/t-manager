@@ -7,6 +7,7 @@ const {validationResult, check} = require('express-validator');
 
 const config = require('config');
 const User = require('../../models/User');
+const Task = require('../../models/Task');
 const auth = require('../../middleware/auth');
 
 // @route   POST api/users
@@ -109,7 +110,8 @@ router.post('/update', auth, async(req, res) => {
 router.delete('/', auth, async (req, res) => {
     
     try {
-        // Remove currently logged in user 
+        // Remove currently logged in user and delete all his data
+        await Task.deleteMany({user: req.user.id});
         await User.findOneAndDelete({_id: req.user.id});
 
         res.json({message: "User removed"})

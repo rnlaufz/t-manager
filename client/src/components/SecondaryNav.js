@@ -18,7 +18,6 @@ const SecondaryNav = ({auth: {isAuthenticated, loading}, navTitle: {navTitle}, l
     <ul className="flex-center-row">
        <li><Link to='/new_task'><i><FontAwesomeIcon icon={faPlus} /></i></Link></li>
         <li><Link to="/settings/user_data"><i ><FontAwesomeIcon icon={faCog} /></i></Link></li>
-        {/* This one temporarily leads to index page */}
         <li><a href="#!" onClick={logout}><i><FontAwesomeIcon icon={faSignOutAlt} /></i></a></li>
     </ul>
   )
