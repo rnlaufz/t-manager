@@ -10,8 +10,8 @@
     --color-primary-shade: #f6f6f5;
     --color-secondary-light: #00B1CC;
     --color-secondary-dark: #008DA3;
-    --color-success: #00cd00;
-    --color-danger: #ff1a1a;
+    --color-success: #00cc81;
+    --color-danger: #cc1b00;
     --color-warning: #f5b82e;
     --color-info: #add8e6;
     --font-primary: 'Roboto', sans-serif;
@@ -180,18 +180,18 @@ body {
 }
 
 .delete{
-    border: solid 1px darkred;
-    background-color: darkred;
+    border: solid 1px var(--color-danger);
+    background-color: var(--color-danger);
     color: var(--color-primary);
 }
 .completed{
     border: solid 1px var(--color-primary);
-    background-color: forestgreen ;
+    background-color: var(--color-success) ;
     color: var(--color-primary);
 }
 
 .urgent {
-    color: #ff0000;
+    color: var(--color-danger);
 }
 
 /* Secondary nav */
