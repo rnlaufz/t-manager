@@ -1,7 +1,7 @@
 import {GET_TASKS, GET_TASK, UPDATE_TASK, GET_COMPTASKS, DELETE_TASK, DELETE_USER_DATA, TASK_ERROR} from './types';
 import axios from "axios";
 
-import {setAlert} from './alert'
+
 
 // @TO_DO create func for NEW, EDIT, GET && TEST DELETE
 export const getTasks = () => async dispatch => {
@@ -122,7 +122,8 @@ export const deleteTask = (id) => async dispatch => {
     try{
         const res = await axios.delete(`/api/tasks/${id}`)
         dispatch({
-            type: DELETE_TASK
+            type: DELETE_TASK,
+            payload: res.data
         });
     }
     catch(err){
@@ -137,7 +138,8 @@ export const resetTasks = () => async dispatch => {
     try{
         const res = await axios.delete(`/api/tasks/`)
         dispatch({
-            type: DELETE_USER_DATA
+            type: DELETE_USER_DATA,
+            payload: res.data
         });
     }
     catch(err){

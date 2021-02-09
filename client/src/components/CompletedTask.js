@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import React from 'react';
 import propTypes from 'prop-types';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCheck, faEdit, faExclamationCircle, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faExclamationCircle, faTrash} from '@fortawesome/free-solid-svg-icons';
 
 import {deleteTask} from "../actions/task";
 import {getCompleted} from "../actions/task";

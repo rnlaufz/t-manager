@@ -109,7 +109,8 @@ export const deleteUser = () =>async  dispatch => {
     try {
         const res = await axios.delete('/api/users');
         dispatch({
-            type: DELETE_USER
+            type: DELETE_USER,
+            payload: res.data
         })
         
     } catch (err) {

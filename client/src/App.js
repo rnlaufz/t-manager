@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {v4 as uuid} from "uuid";
-import propTypes from 'prop-types';
+
 // Redux
 import {Provider} from 'react-redux';
 import store from './store';
@@ -33,7 +33,7 @@ import {loadUser} from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 
-import Alert from './components/Alert';
+
 
 export class App extends React.Component {
  

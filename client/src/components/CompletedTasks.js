@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import {v4 as uuid} from 'uuid';
 
 import propTypes from 'prop-types';
@@ -20,7 +20,7 @@ const CompletedTasks = ({task: {tasks, noCompletes}, setNavTitle, getCompleted})
     useEffect(() => {
         setNavTitle("Completed");
         getCompleted()
-    }, []); 
+    }, [setNavTitle, getCompleted]); 
 
     return ( <React.Fragment>
      <Alert />          
