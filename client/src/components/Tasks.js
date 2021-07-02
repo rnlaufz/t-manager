@@ -11,14 +11,11 @@ import Alert from './Alert';
 import {setNavTitle} from '../actions/navTitle';
 import {getTasks} from "../actions/task";
 
-
-
-
 const Tasks = ({getTasks, task: {tasks}, setNavTitle}) => {
     useEffect(() => {
         setNavTitle("Dashboard");
         getTasks();
-    }, [tasks, getTasks, setNavTitle]); 
+    }, [getTasks, setNavTitle]); 
     
     return ( <React.Fragment>
      <Alert />          
